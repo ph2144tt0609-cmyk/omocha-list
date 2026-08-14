@@ -4,175 +4,214 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#ff8a3d">
-<title>おもちゃひょう</title>
+<meta name="theme-color" content="#2e2a24">
+<title>おもちゃメニュー</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧸</text></svg>">
 <style>
   :root{
-    --bg:#fff8ef;
-    --card:#ffffff;
-    --ink:#33302c;
-    --sub:#7d756c;
-    --line:#eadfd0;
-    --accent:#ff8a3d;
-    --accent2:#3fb6a8;
-    --accent3:#5b8def;
-    --shadow:0 3px 0 #e9dcc9;
-    --radius:18px;
+    --bg:#f6f2e9;
+    --panel:#fffdf8;
+    --ink:#2e2a24;
+    --muted:#8b8272;
+    --line:#e4dcc9;
+    --accent:#b3572e;      /* 時間・主アクセント */
+    --teal:#347f76;        /* ジャンル・プラン */
+    --plum:#7a559e;        /* 年齢 */
+    --slate:#48688f;       /* 人数 */
+    --gold:#c8a45c;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(60,50,30,.05), 0 12px 32px -20px rgba(60,50,30,.28);
+    --serif:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:"Hiragino Maru Gothic ProN","ヒラギノ丸ゴ ProN","Zen Maru Gothic","Rounded Mplus 1c",-apple-system,"Segoe UI","Meiryo",sans-serif;
-    font-size:17px;line-height:1.7;
-    padding-bottom:80px;
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;
+    font-size:16px;line-height:1.75;
+    padding-bottom:72px;
   }
-  .wrap{max-width:980px;margin:0 auto;padding:0 14px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 18px}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   /* ===== ヘッダー ===== */
   header{
-    background:linear-gradient(160deg,#ffb765,#ff8a3d);
-    color:#fff;padding:22px 0 26px;text-align:center;
-    border-bottom-left-radius:26px;border-bottom-right-radius:26px;
-    box-shadow:0 4px 0 rgba(0,0,0,.06);
+    text-align:center;padding:38px 16px 26px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(200,164,92,.07), rgba(200,164,92,0) 70%),
+      var(--bg);
   }
-  header h1{margin:0;font-size:30px;letter-spacing:.06em;text-shadow:0 2px 0 rgba(0,0,0,.12)}
-  header p{margin:6px 0 0;font-size:14px;opacity:.95}
+  .ovl{
+    display:block;font-size:11px;letter-spacing:.42em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:8px;text-indent:.42em;
+  }
+  header h1{
+    margin:0;font-family:var(--serif);font-weight:600;
+    font-size:36px;letter-spacing:.14em;text-indent:.14em;
+  }
+  .orn{
+    display:flex;align-items:center;gap:12px;justify-content:center;
+    margin:12px auto 8px;color:var(--gold);width:min(340px,72%);
+  }
+  .orn::before,.orn::after{content:"";flex:1;border-top:1px solid var(--line)}
+  .orn span{font-size:10px}
+  header p{margin:0;font-size:13.5px;color:var(--muted);letter-spacing:.08em}
 
   /* ===== パネル ===== */
   .panel{
-    background:var(--card);border:2px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:14px;margin-top:16px;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 20px;margin-top:20px;
   }
-  .panel h2{
-    margin:0 0 10px;font-size:17px;display:flex;align-items:center;gap:7px;
+  .row{margin-bottom:16px}
+  .row:last-child{margin-bottom:0}
+  .row .label{
+    font-size:13.5px;font-weight:bold;margin-bottom:8px;letter-spacing:.03em;
+    display:flex;align-items:baseline;gap:10px;
   }
-  .panel h2 .badge{
-    background:var(--accent);color:#fff;border-radius:999px;
-    font-size:12px;padding:2px 9px;font-weight:normal;
+  .row .label .en{
+    font-weight:normal;font-size:10px;letter-spacing:.24em;color:var(--muted);
+    text-transform:uppercase;
   }
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{
-    appearance:none;border:2px solid var(--line);background:#fffdf9;color:var(--ink);
-    border-radius:999px;padding:9px 15px;font-size:16px;font-family:inherit;
-    cursor:pointer;box-shadow:0 2px 0 #ece1d1;transition:.12s;
+    appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:999px;padding:8px 16px;font-size:14.5px;cursor:pointer;
+    transition:border-color .15s, background .15s, color .15s, transform .1s;
   }
-  .chip:active{transform:translateY(2px);box-shadow:none}
-  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 0 #d96a22;font-weight:bold}
-  .chip.g[aria-pressed="true"]{background:var(--accent2);border-color:var(--accent2);box-shadow:0 2px 0 #2e8d82}
-  .chip.n[aria-pressed="true"]{background:var(--accent3);border-color:var(--accent3);box-shadow:0 2px 0 #3f68be}
-  .chip.a[aria-pressed="true"]{background:#b06fd4;border-color:#b06fd4;color:#fff;box-shadow:0 2px 0 #8b4fae;font-weight:bold}
-
-  .row{margin-bottom:14px}
-  .row:last-child{margin-bottom:0}
-  .row .label{font-size:14px;color:var(--sub);margin-bottom:6px}
+  .chip:hover{border-color:#cfc4a9}
+  .chip:active{transform:scale(.97)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .chip.g[aria-pressed="true"]{background:var(--teal);border-color:var(--teal)}
+  .chip.n[aria-pressed="true"]{background:var(--slate);border-color:var(--slate)}
+  .chip.a[aria-pressed="true"]{background:var(--plum);border-color:var(--plum)}
 
   /* ===== 結果ヘッダ ===== */
   .resultbar{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-    margin:22px 0 10px;flex-wrap:wrap;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin:26px 0 12px;flex-wrap:wrap;
   }
-  .count{font-size:20px;font-weight:bold}
-  .count b{color:var(--accent);font-size:26px}
+  .count{font-size:15px;letter-spacing:.04em}
+  .count b{
+    font-family:var(--serif);font-size:30px;color:var(--accent);
+    margin-right:4px;font-weight:600;
+  }
   .actions{display:flex;gap:8px;flex-wrap:wrap}
   .btn{
-    appearance:none;border:none;border-radius:999px;padding:10px 16px;
-    font-size:15px;font-family:inherit;cursor:pointer;color:#fff;background:var(--accent3);
-    box-shadow:0 3px 0 #3f68be;transition:.12s;
+    appearance:none;border:1px solid transparent;border-radius:999px;padding:10px 18px;
+    font-size:14px;cursor:pointer;color:#fff;background:var(--ink);
+    letter-spacing:.03em;transition:opacity .15s, transform .1s;
   }
-  .btn:active{transform:translateY(3px);box-shadow:none}
-  .btn.green{background:var(--accent2);box-shadow:0 3px 0 #2e8d82}
-  .btn.ghost{background:#fff;color:var(--sub);border:2px solid var(--line);box-shadow:0 3px 0 #ece1d1}
+  .btn:hover{opacity:.88}
+  .btn:active{transform:scale(.98)}
+  .btn.teal{background:var(--teal)}
+  .btn.warm{background:var(--accent)}
+  .btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:#cfc4a9;opacity:1}
 
-  /* ===== カード ===== */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  /* ===== カード（メニュー行スタイル） ===== */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
   .toy{
-    background:var(--card);border:2px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:13px 14px;position:relative;
-    display:flex;flex-direction:column;gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);padding:14px 16px 12px;position:relative;
+    display:flex;flex-direction:column;gap:4px;
+    transition:transform .15s, box-shadow .15s;
   }
-  .toy .top{display:flex;align-items:flex-start;gap:10px}
-  .toy .icon{font-size:32px;line-height:1}
-  .toy .name{font-size:18px;font-weight:bold;line-height:1.35;word-break:auto-phrase}
-  .toy .note{font-size:13px;color:var(--sub);line-height:1.5}
-  .toy .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-  .tag{
-    font-size:13px;border-radius:999px;padding:3px 10px;background:#fff3e6;color:#b6620f;border:1px solid #ffdcb8;
-  }
-  .tag.time{background:#fff3e6;color:#b6620f;border-color:#ffdcb8;font-weight:bold}
-  .tag.ppl{background:#e9f2ff;color:#3a5ea8;border-color:#cfe0ff}
-  .tag.gen{background:#e6f7f4;color:#2b7d72;border-color:#c6ece5}
-  .tag.age{background:#f6ecfb;color:#7c3fa3;border-color:#e6d2f2}
+  .toy:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(60,50,30,.06),0 18px 40px -22px rgba(60,50,30,.35)}
+  .toy .line{display:flex;align-items:baseline;gap:7px;padding-right:20px}
+  .toy .nm{font-size:15.5px;font-weight:bold;line-height:1.45;word-break:auto-phrase}
+  .toy .dots{flex:1;border-bottom:1.5px dotted #cfc4a9;min-width:14px;transform:translateY(-4px)}
+  .toy .tm{font-size:15px;font-weight:bold;color:var(--accent);white-space:nowrap;font-feature-settings:"tnum"}
+  .toy .meta{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .toy .note{font-size:12px;color:var(--muted);font-style:italic}
   .toy .edit{
-    position:absolute;top:8px;right:8px;background:none;border:none;font-size:16px;
-    cursor:pointer;opacity:.35;padding:4px;
+    position:absolute;top:9px;right:9px;background:none;border:none;font-size:14px;
+    cursor:pointer;opacity:.25;padding:4px;transition:opacity .15s;
   }
-  .toy .edit:hover{opacity:1}
-  .toy.mine{border-style:dashed;border-color:#f3c88a}
+  .toy .edit:hover{opacity:.9}
+  .toy.mine{border-style:dashed;border-color:#d8c9a4}
   .empty{
-    text-align:center;color:var(--sub);padding:34px 10px;background:var(--card);
-    border:2px dashed var(--line);border-radius:var(--radius);
+    text-align:center;color:var(--muted);padding:40px 16px;background:var(--panel);
+    border:1px dashed var(--line);border-radius:var(--radius);font-size:14.5px;
   }
 
-  /* ===== くみあわせ ===== */
-  #plan{margin-top:14px}
+  /* ===== プラン ===== */
+  #plan{margin-top:16px}
   .planbox{
-    background:linear-gradient(160deg,#effbf8,#e3f5f1);
-    border:2px solid #bfe6de;border-radius:var(--radius);padding:14px;
+    background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;
   }
-  .planbox h3{margin:0 0 10px;font-size:17px;color:#2b7d72}
-  .steps{display:flex;flex-direction:column;gap:8px}
+  .planbox h3{
+    margin:0 0 12px;font-family:var(--serif);font-weight:600;
+    font-size:18px;letter-spacing:.06em;color:var(--teal);
+  }
   .step{
-    display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:9px 12px;
-    border:1px solid #cfeae4;
+    display:flex;align-items:baseline;gap:12px;padding:9px 2px;
+    border-bottom:1px dotted var(--line);
   }
+  .step:last-of-type{border-bottom:none}
   .step .no{
-    background:var(--accent2);color:#fff;border-radius:50%;width:26px;height:26px;
-    display:grid;place-items:center;font-size:14px;flex:none;
+    font-family:var(--serif);font-size:15px;color:var(--gold);
+    min-width:1.4em;text-align:center;
   }
-  .step .nm{font-weight:bold;flex:1}
-  .step .tm{font-size:14px;color:#2b7d72;white-space:nowrap}
-  .plantotal{margin-top:10px;font-size:15px;color:#2b7d72;text-align:right}
+  .step .nm{font-weight:bold;flex:1;font-size:15px}
+  .step .tm{font-size:14px;color:var(--teal);white-space:nowrap;font-feature-settings:"tnum"}
+  .plantotal{margin-top:10px;font-size:13.5px;color:var(--muted);text-align:right;letter-spacing:.03em}
+  .planbox .again{text-align:right;margin-top:10px}
 
   /* ===== ルーレット結果 ===== */
-  #pick{margin-top:14px}
+  #pick{margin-top:16px}
   .pickbox{
-    background:linear-gradient(160deg,#fff0d9,#ffe3bd);border:2px solid #ffcf94;
-    border-radius:var(--radius);padding:18px;text-align:center;
+    background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:22px 20px;text-align:center;
   }
-  .pickbox .big{font-size:26px;font-weight:bold;margin:6px 0}
-  .pickbox .ic{font-size:46px}
+  .pickbox .small{font-size:12px;letter-spacing:.28em;color:var(--muted);text-indent:.28em}
+  .pickbox .ic{font-size:38px;margin:6px 0 2px}
+  .pickbox .big{font-family:var(--serif);font-size:25px;font-weight:600;letter-spacing:.05em;margin:2px 0 6px}
+  .pickbox .meta{font-size:13.5px;color:var(--muted)}
+
+  /* ===== パネル見出し ===== */
+  .panel h2{
+    margin:0 0 12px;font-size:15.5px;letter-spacing:.04em;
+    display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  }
+  .panel h2 .badge{
+    background:#f2ecdd;color:#8b7a52;border-radius:999px;
+    font-size:11.5px;padding:2px 11px;font-weight:normal;letter-spacing:.05em;
+  }
+  .hint{font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.7}
 
   /* ===== モーダル ===== */
   dialog{
-    border:none;border-radius:22px;padding:0;width:min(460px,92vw);
-    box-shadow:0 18px 50px rgba(0,0,0,.25);
+    border:1px solid var(--line);border-radius:18px;padding:0;width:min(460px,92vw);
+    box-shadow:0 24px 60px rgba(40,32,20,.3);background:var(--panel);color:var(--ink);
   }
-  dialog::backdrop{background:rgba(50,40,30,.45)}
-  .dlg{padding:20px}
-  .dlg h3{margin:0 0 14px;font-size:20px}
-  label.f{display:block;margin-bottom:12px;font-size:14px;color:var(--sub)}
-  label.f input,label.f select,label.f textarea{
-    display:block;width:100%;margin-top:5px;padding:10px 12px;font-size:16px;
-    border:2px solid var(--line);border-radius:12px;font-family:inherit;background:#fffdf9;color:var(--ink);
+  dialog::backdrop{background:rgba(40,34,26,.5)}
+  .dlg{padding:22px 24px}
+  .dlg h3{margin:0 0 16px;font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:.06em}
+  label.f{display:block;margin-bottom:12px;font-size:12.5px;color:var(--muted);letter-spacing:.03em}
+  label.f input,label.f select{
+    display:block;width:100%;margin-top:4px;padding:9px 12px;font-size:15px;
+    border:1px solid var(--line);border-radius:10px;font-family:inherit;background:#fff;color:var(--ink);
   }
-  .dlg .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
-  .danger{background:#e2695c;box-shadow:0 3px 0 #b64c41}
-  .hint{font-size:12px;color:var(--sub);margin-top:-6px;margin-bottom:12px}
+  .dlg .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+  .danger{background:#a8483c}
 
-  footer{text-align:center;color:var(--sub);font-size:12px;padding:26px 14px}
-  @media (max-width:420px){
-    body{font-size:16px}
-    header h1{font-size:25px}
-    .grid{grid-template-columns:1fr 1fr;gap:10px}
-    .toy .name{font-size:15px}
-    .toy .icon{font-size:26px}
-    .tag{font-size:11px;padding:2px 8px}
+  footer{
+    text-align:center;color:var(--muted);font-size:11.5px;padding:34px 16px 8px;
+    letter-spacing:.08em;
   }
+  @media (max-width:430px){
+    header h1{font-size:28px}
+    .grid{grid-template-columns:1fr}
+    .panel{padding:14px 14px}
+  }
+
   /* =========================================================
-     いんさつ用（A4よこ・左右2だんの メニュー）
+     印刷用（A4横・左右2段のメニュー）
      ========================================================= */
   .printonly{display:none}
   @page{ size:A4 landscape; margin:11mm 12mm 10mm; }
@@ -182,8 +221,8 @@
     .wrap{max-width:none;padding:0}
     .printonly{display:block}
 
-    .p-head{border-bottom:2.5pt solid #333;padding-bottom:4pt;margin-bottom:7pt}
-    .p-head h1{margin:0;font-size:19pt;letter-spacing:.08em}
+    .p-head{border-bottom:2pt solid #333;padding-bottom:5pt;margin-bottom:7pt}
+    .p-head h1{margin:0;font-family:var(--serif);font-weight:600;font-size:19pt;letter-spacing:.12em}
     .p-head .p-sub{font-size:8.5pt;color:#555;margin-top:2pt;
       display:flex;justify-content:space-between;gap:8pt;flex-wrap:wrap}
 
@@ -192,7 +231,7 @@
     .p-genre{margin:0 0 7pt}
     .p-genre h2{
       font-size:12pt;margin:0 0 4pt;padding:2pt 0 2.5pt;
-      border-bottom:1.2pt solid #666;letter-spacing:.04em;
+      border-bottom:1.2pt solid #666;letter-spacing:.06em;
       break-inside:avoid;break-after:avoid;
     }
     .p-genre h2 .n{float:right;font-size:8.5pt;font-weight:normal;color:#666}
@@ -208,14 +247,15 @@
     .p-foot{margin-top:6pt;border-top:.8pt solid #ccc;padding-top:3pt;
       font-size:8pt;color:#777;text-align:center;column-span:all}
   }
-
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🧸 おもちゃひょう</h1>
-  <p>いま あそべる おもちゃが すぐ わかる</p>
+  <span class="ovl">Home Toy Menu</span>
+  <h1>おもちゃメニュー</h1>
+  <div class="orn"><span>◆</span></div>
+  <p>いま遊べるおもちゃが、すぐ見つかる</p>
 </header>
 
 <div class="wrap">
@@ -223,29 +263,29 @@
   <!-- しぼりこみ -->
   <section class="panel">
     <div class="row">
-      <h2>⏰ どれくらい あそべる？</h2>
+      <div class="label"><span class="en">Time</span>⏰ どれくらい遊べる？</div>
       <div class="chips" id="timeChips"></div>
     </div>
     <div class="row">
-      <div class="label">🎂 だれが あそぶ？（としの めやす）</div>
+      <div class="label"><span class="en">Age</span>🎂 だれが遊ぶ？</div>
       <div class="chips" id="ageChips"></div>
     </div>
     <div class="row">
-      <div class="label">👦 なんにんで あそぶ？</div>
+      <div class="label"><span class="en">Players</span>👦 何人で遊ぶ？</div>
       <div class="chips" id="pplChips"></div>
     </div>
     <div class="row">
-      <div class="label">🗂 ジャンル</div>
+      <div class="label"><span class="en">Genre</span>🗂 ジャンル</div>
       <div class="chips" id="genChips"></div>
     </div>
   </section>
 
   <!-- けっか -->
   <div class="resultbar">
-    <div class="count"><b id="cnt">0</b> こ あそべるよ！</div>
+    <div class="count"><b id="cnt">0</b>こ 遊べます</div>
     <div class="actions">
-      <button class="btn green" id="planBtn">🧩 じかんいっぱい あそぶ くみあわせ</button>
-      <button class="btn" id="pickBtn">🎯 ルーレットで きめる</button>
+      <button class="btn teal" id="planBtn">🧩 時間いっぱい遊ぶプラン</button>
+      <button class="btn warm" id="pickBtn">🎯 ルーレットで決める</button>
     </div>
   </div>
 
@@ -256,30 +296,29 @@
   <div id="emptyBox"></div>
 
   <!-- いんさつ -->
-  <section class="panel" style="margin-top:26px">
-    <h2>🖨️ いんさつ <span class="badge">A4よこ・左右2だんの メニュー</span></h2>
+  <section class="panel" style="margin-top:28px">
+    <h2>🖨️ 印刷 <span class="badge">A4横・左右2段のメニュー</span></h2>
     <div class="actions">
-      <button class="btn" id="printAllBtn">🖨️ ぜんぶ いんさつ</button>
-      <button class="btn ghost" id="printFilterBtn">🖨️ いま えらんだ ぶんだけ</button>
+      <button class="btn" id="printAllBtn">ぜんぶ印刷</button>
+      <button class="btn ghost" id="printFilterBtn">今えらんでいる分だけ</button>
     </div>
-    <p class="hint" style="margin-top:10px">
-      いんさつの がめんで <b>A4・よこむき（横）</b> をえらんでね。<br>
-      ジャンルごとに ならんだ、おみせの メニューみたいな 紙になります。
+    <p class="hint">
+      印刷画面で <b>A4・横向き</b> を選んでください。ジャンルごとに並んだメニュー形式で印刷されます。
     </p>
   </section>
 
   <!-- かんり -->
-  <section class="panel" style="margin-top:26px">
-    <h2>🛠 おうちのひとメニュー <span class="badge">おもちゃを ふやす・なおす</span></h2>
+  <section class="panel" style="margin-top:16px">
+    <h2>🛠 管理メニュー <span class="badge">おもちゃの追加・修正</span></h2>
     <div class="actions">
-      <button class="btn" id="addBtn">➕ おもちゃを ふやす</button>
-      <button class="btn ghost" id="exportBtn">💾 データを かきだす</button>
-      <button class="btn ghost" id="importBtn">📂 データを よみこむ</button>
-      <button class="btn ghost" id="resetBtn">↩️ さいしょに もどす</button>
+      <button class="btn" id="addBtn">＋ おもちゃを追加</button>
+      <button class="btn ghost" id="exportBtn">データを書き出す</button>
+      <button class="btn ghost" id="importBtn">データを読み込む</button>
+      <button class="btn ghost" id="resetBtn">最初にもどす</button>
     </div>
-    <p class="hint" style="margin-top:10px">
-      ふやした おもちゃは この タブレット／パソコンの なかに ほぞんされます。<br>
-      ほかの きかいでも 見せたいときは「データを かきだす」→ そのファイルを おくって「よみこむ」。
+    <p class="hint">
+      追加・修正した内容は、この端末のブラウザの中に保存されます。<br>
+      ほかの端末にも映したいときは「データを書き出す」→ そのファイルを送って「データを読み込む」。
     </p>
   </section>
 
@@ -287,14 +326,14 @@
 
 <section id="printSheet" class="printonly"></section>
 
-<footer>おもちゃひょう ／ さいしゅう こうしん 2026-08-14</footer>
+<footer>おもちゃメニュー ｜ 最終更新 2026-08-14</footer>
 
-<!-- ついか・へんしゅう モーダル -->
+<!-- 追加・修正モーダル -->
 <dialog id="dlg">
   <form method="dialog" class="dlg" id="form">
-    <h3 id="dlgTitle">おもちゃを ふやす</h3>
-    <label class="f">なまえ
-      <input name="name" required maxlength="40" placeholder="れい：UNO">
+    <h3 id="dlgTitle">おもちゃを追加</h3>
+    <label class="f">名前
+      <input name="name" required maxlength="40" placeholder="例：UNO">
     </label>
     <label class="f">アイコン（絵文字）
       <input name="icon" maxlength="4" placeholder="🃏">
@@ -303,25 +342,25 @@
       <input name="genre" list="genreList" required placeholder="カードゲーム">
       <datalist id="genreList"></datalist>
     </label>
-    <label class="f">あそぶ じかんの めやす（ふん）
+    <label class="f">遊ぶ時間のめやす（分）
       <input name="min" type="number" min="1" max="480" step="5" required placeholder="20">
     </label>
-    <label class="f">にんずう（さいしょう〜さいだい）
+    <label class="f">人数（最小-最大）
       <input name="people" placeholder="2-6" pattern="\d+(-\d+)?" required>
     </label>
-    <label class="f">としの めやす（この としから）
+    <label class="f">年齢のめやす（この年から）
       <select name="ageFrom" id="ageFrom"></select>
     </label>
-    <label class="f">としの めやす（この としまで）
+    <label class="f">年齢のめやす（この年まで）
       <select name="ageTo" id="ageTo"></select>
     </label>
     <label class="f">メモ（なくてもOK）
-      <input name="note" maxlength="60" placeholder="れい：ぜんぶで 108まい">
+      <input name="note" maxlength="60" placeholder="例：ぜんぶで108まい">
     </label>
     <div class="btns">
-      <button class="btn danger" value="delete" id="delBtn" type="submit" formnovalidate>けす</button>
-      <button class="btn ghost" value="cancel" type="submit" formnovalidate>やめる</button>
-      <button class="btn green" value="ok" type="submit">ほぞん する</button>
+      <button class="btn danger" value="delete" id="delBtn" type="submit" formnovalidate>削除</button>
+      <button class="btn ghost" value="cancel" type="submit" formnovalidate>キャンセル</button>
+      <button class="btn teal" value="ok" type="submit">保存する</button>
     </div>
   </form>
 </dialog>
@@ -330,122 +369,122 @@
 
 <script>
 /* =========================================================
-   おもちゃデータ（もとデータ）
-   ─ 手書きの「おもちゃひょう」から起こしたもの
-   ─ min = あそぶ じかんの めやす（ふん）
+   おもちゃデータ（正本）
+   min = 遊ぶ時間のめやす（分） / people = [最小,最大]
+   age = [から,まで] 0:小さい子 1:ようちえん 2:小1・2 3:小3・4 4:小5・6 5:大人
    ========================================================= */
 const SEED = [
-  // ▼ カードゲーム（手書き1ページ目のとおり）
-  {id:"c01", name:"DOBBLE（ドブル）",            icon:"🌀", genre:"カードゲーム", min:10, people:[2,8], age:[1,5], note:"こっちゃんの"},
-  {id:"c02", name:"きおん",                        icon:"🧠", genre:"カードゲーム", min:15, people:[2,4], age:[1,5], note:"きおくりょくの ゲーム"},
-  {id:"c03", name:"UNO",                        icon:"🎴", genre:"カードゲーム", min:20, people:[2,10], age:[1,5]},
-  {id:"c04", name:"なんじゃもんじゃ",              icon:"👾", genre:"カードゲーム", min:10, people:[2,6], age:[1,5]},
-  {id:"c05", name:"しぜんかんさつカルタ",          icon:"🍃", genre:"カードゲーム", min:15, people:[2,6], age:[1,3]},
-  {id:"c06", name:"ディズニー カルタ",             icon:"🏰", genre:"カードゲーム", min:15, people:[2,6], age:[1,3]},
-  {id:"c07", name:"トランプ",                     icon:"♠️", genre:"カードゲーム", min:20, people:[2,6], age:[1,5], note:"ババぬき・しんけいすいじゃく など"},
-  {id:"c08", name:"日本カルタ",                    icon:"🗾", genre:"カードゲーム", min:15, people:[2,6], age:[2,4]},
-  {id:"c09", name:"Flight chess（フライトチェス）", icon:"✈️", genre:"カードゲーム", min:30, people:[2,4], age:[2,5]},
-  {id:"c10", name:"黒ひげ危機一発",                icon:"🏴‍☠️", genre:"カードゲーム", min:10, people:[2,4], age:[1,4]},
-  {id:"c11", name:"モノポリー",                    icon:"🏦", genre:"カードゲーム", min:90, people:[2,6], age:[3,5], note:"がっつり あそぶとき"},
-  {id:"c12", name:"ワンピース カードゲーム",        icon:"🏴", genre:"カードゲーム", min:30, people:[2,2], age:[3,5]},
-  {id:"c13", name:"中日ドラゴンズ カードゲーム",     icon:"⚾", genre:"カードゲーム", min:20, people:[2,4], age:[2,4]},
-  {id:"c14", name:"大人の トランプ",               icon:"🎩", genre:"カードゲーム", min:20, people:[2,6], age:[4,5]},
-  {id:"c15", name:"ママの つくった ことばあつめカード", icon:"✍️", genre:"カードゲーム", min:15, people:[1,4], age:[1,3], note:"てづくり"},
-  {id:"c16", name:"人生ゲーム（かんいばん）",        icon:"🚙", genre:"カードゲーム", min:45, people:[2,4], age:[1,4]},
-  {id:"c17", name:"レクサスカード（コースター）",     icon:"🥤", genre:"カードゲーム", min:5,  people:[1,4], age:[1,5], note:"あそぶというより コースター"},
-  {id:"c18", name:"てづくり カードゲーム",          icon:"✂️", genre:"カードゲーム", min:15, people:[2,4], age:[1,4], note:"じぶんで つくったやつ"},
-  {id:"c19", name:"ポケモンカードゲーム",           icon:"⚡", genre:"カードゲーム", min:30, people:[2,2], age:[2,5]},
-
-  // ▼ おえかき
-  {id:"d01", name:"手の よごれない いろしお ※かくにん中", icon:"🧂", genre:"おえかき", min:15, people:[1,4], age:[1,3], note:"なまえ かくにん中"},
-  {id:"d02", name:"クレヨン",                      icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
-  {id:"d03", name:"かきかたマーカー 8色",           icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,3]},
-  {id:"d04", name:"すいせい絵の具 9色",             icon:"🎨", genre:"おえかき", min:30, people:[1,4], age:[2,5], note:"じゅんびと かたづけも あるよ"},
-  {id:"d05", name:"ハイクレヨン",                  icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
-  {id:"d06", name:"水で おとせる クレヨン 16色",     icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,2]},
-  {id:"d07", name:"クーピーペンシル 6色",           icon:"✏️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
-  {id:"d08", name:"ミニクレヨン 16色",              icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
-  {id:"d09", name:"すいせいペン 12色",              icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
-  {id:"d10", name:"すみっコぐらしの ペン 5色",       icon:"🐧", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
-  {id:"d11", name:"スマイルペン 3色",               icon:"😊", genre:"おえかき", min:15, people:[1,4], age:[1,4]},
-  {id:"d12", name:"ミッキーの 色えんぴつ 12色",      icon:"🐭", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
-  {id:"d13", name:"さくらクレパス",                 icon:"🌸", genre:"おえかき", min:20, people:[1,4], age:[1,4], note:"ふみちゃんに もらった たんじょうびプレゼント"},
+  // ▼ カードゲーム
+  {id:"c01", name:"DOBBLE（ドブル）",              icon:"🌀", genre:"カードゲーム", min:10, people:[2,8],  age:[1,5], note:"こっちゃんの"},
+  {id:"c02", name:"きおん",                        icon:"🧠", genre:"カードゲーム", min:15, people:[2,4],  age:[1,5], note:"記憶力ゲーム"},
+  {id:"c03", name:"UNO",                          icon:"🎴", genre:"カードゲーム", min:20, people:[2,10], age:[1,5]},
+  {id:"c04", name:"なんじゃもんじゃ",               icon:"👾", genre:"カードゲーム", min:10, people:[2,6],  age:[1,5]},
+  {id:"c05", name:"しぜんかんさつカルタ",            icon:"🍃", genre:"カードゲーム", min:15, people:[2,6],  age:[1,3]},
+  {id:"c06", name:"ディズニーカルタ",               icon:"🏰", genre:"カードゲーム", min:15, people:[2,6],  age:[1,3]},
+  {id:"c07", name:"トランプ",                      icon:"♠️", genre:"カードゲーム", min:20, people:[2,6],  age:[1,5], note:"ババぬき・しんけいすいじゃく など"},
+  {id:"c08", name:"日本カルタ",                    icon:"🗾", genre:"カードゲーム", min:15, people:[2,6],  age:[2,4]},
+  {id:"c09", name:"Flight chess（フライトチェス）",  icon:"✈️", genre:"カードゲーム", min:30, people:[2,4],  age:[2,5]},
+  {id:"c10", name:"黒ひげ危機一発",                 icon:"🏴‍☠️", genre:"カードゲーム", min:10, people:[2,4], age:[1,4]},
+  {id:"c11", name:"モノポリー",                    icon:"🏦", genre:"カードゲーム", min:90, people:[2,6],  age:[3,5], note:"じっくり遊ぶ日に"},
+  {id:"c12", name:"ワンピースカードゲーム",          icon:"🏴", genre:"カードゲーム", min:30, people:[2,2],  age:[3,5]},
+  {id:"c13", name:"中日ドラゴンズカードゲーム",       icon:"⚾", genre:"カードゲーム", min:20, people:[2,4],  age:[2,4]},
+  {id:"c14", name:"大人のトランプ",                 icon:"🎩", genre:"カードゲーム", min:20, people:[2,6],  age:[4,5]},
+  {id:"c15", name:"ママの作った ことばあつめカード",   icon:"✍️", genre:"カードゲーム", min:15, people:[1,4], age:[1,3], note:"手作り"},
+  {id:"c16", name:"人生ゲーム（かんたん版）",         icon:"🚙", genre:"カードゲーム", min:45, people:[2,4],  age:[1,4]},
+  {id:"c17", name:"レクサスカード（コースター）",     icon:"🥤", genre:"カードゲーム", min:5,  people:[1,4],  age:[1,5], note:"遊ぶというよりコースター"},
+  {id:"c18", name:"てづくりカードゲーム",            icon:"✂️", genre:"カードゲーム", min:15, people:[2,4],  age:[1,4], note:"手作り"},
+  {id:"c19", name:"ポケモンカードゲーム",            icon:"⚡", genre:"カードゲーム", min:30, people:[2,2],  age:[2,5]},
 
   // ▼ ボードゲーム
-  {id:"b01", name:"ママの つくった てづくりオセロ",   icon:"⚫", genre:"ボードゲーム", min:20, people:[2,2], age:[2,5], note:"てづくり"},
-  {id:"b02", name:"くもんの しょうぎ",              icon:"♟️", genre:"ボードゲーム", min:30, people:[2,2], age:[2,5]},
-  {id:"b03", name:"えいきゅうに あそべるパズル 脳ブロック", icon:"🧩", genre:"ボードゲーム", min:20, people:[1,2], age:[2,5]},
+  {id:"b01", name:"ママの作った 手作りオセロ",        icon:"⚫", genre:"ボードゲーム", min:20, people:[2,2], age:[2,5], note:"手作り"},
+  {id:"b02", name:"くもんの将棋",                   icon:"♟️", genre:"ボードゲーム", min:30, people:[2,2], age:[2,5]},
+  {id:"b03", name:"脳ブロック（永久に遊べるパズル）",  icon:"🧩", genre:"ボードゲーム", min:20, people:[1,2], age:[2,5]},
   {id:"b04", name:"ウボンゴ",                      icon:"🔷", genre:"ボードゲーム", min:30, people:[2,4], age:[2,5]},
-  {id:"b05", name:"カタン",                        icon:"🏝️", genre:"ボードゲーム", min:60, people:[3,4], age:[3,5], note:"じかんが あるときに"},
+  {id:"b05", name:"カタン",                        icon:"🏝️", genre:"ボードゲーム", min:60, people:[3,4], age:[3,5], note:"時間があるときに"},
   {id:"b06", name:"ジェンガ",                      icon:"🗼", genre:"ボードゲーム", min:15, people:[2,6], age:[1,5]},
-  {id:"b07", name:"アルファベット ペアードカード",    icon:"🔤", genre:"ボードゲーム", min:15, people:[1,4], age:[1,3], note:"えいごで あそべる"},
-  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], age:[2,5], note:"えいごの ゲーム"},
+  {id:"b07", name:"アルファベット ペアードカード",    icon:"🔤", genre:"ボードゲーム", min:15, people:[1,4], age:[1,3], note:"えいごで遊べる"},
+  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], age:[2,5], note:"えいごのゲーム"},
   {id:"b09", name:"すみっコぐらし ワクワクパーティーゲーム", icon:"🐧", genre:"ボードゲーム", min:30, people:[2,4], age:[1,3]},
-  {id:"b10", name:"トーマスの すごろく",            icon:"🚂", genre:"ボードゲーム", min:20, people:[2,4], age:[0,2]},
-  {id:"b11", name:"ワクワク せかいりょこう すごろく", icon:"🌍", genre:"ボードゲーム", min:45, people:[2,4], age:[2,4]},
-  {id:"b12", name:"ワクワク ゲームセット",           icon:"🎁", genre:"ボードゲーム", min:30, people:[2,4], age:[1,4], note:"いろんなゲームが 入ってる"},
+  {id:"b10", name:"トーマスのすごろく",              icon:"🚂", genre:"ボードゲーム", min:20, people:[2,4], age:[0,2]},
+  {id:"b11", name:"ワクワク世界旅行すごろく",         icon:"🌍", genre:"ボードゲーム", min:45, people:[2,4], age:[2,4]},
+  {id:"b12", name:"ワクワクゲームセット",            icon:"🎁", genre:"ボードゲーム", min:30, people:[2,4], age:[1,4], note:"いろんなゲームが入ってる"},
   {id:"b13", name:"野球盤",                        icon:"⚾", genre:"ボードゲーム", min:30, people:[2,4], age:[1,5]},
 
   // ▼ パズル
-  {id:"p01", name:"くもんの ジグソーパズル（しんかんせん）", icon:"🚄", genre:"パズル", min:20, people:[1,2], age:[1,3]},
-  {id:"p02", name:"むずかしい しんかんせんパズル",   icon:"🚅", genre:"パズル", min:45, people:[1,2], age:[3,5], note:"がっつり やるとき"},
-  {id:"p03", name:"日本ちずの パズル",              icon:"🗾", genre:"パズル", min:20, people:[1,2], age:[2,4]},
-  {id:"p04", name:"すみっコぐらし パズル",          icon:"🐻‍❄️", genre:"パズル", min:30, people:[1,2], age:[2,4]},
-  {id:"p05", name:"どうぶつの かたはめ",            icon:"🦁", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p06", name:"トーマスの かたはめ",            icon:"🚂", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p07", name:"アンパンマンの かたはめ",        icon:"🥯", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p08", name:"トーマスパズル（ちいさい子よう）", icon:"🚃", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p09", name:"プラレールの パズル（ちいさい子よう）", icon:"🛤️", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p10", name:"のりものパズル（音が なる）",     icon:"🔊", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
-  {id:"p11", name:"東京パズル",                     icon:"🗼", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう（むずかしい）"},
-  {id:"p12", name:"ディズニー パズル",              icon:"🏰", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう（むずかしい）"},
-  {id:"p13", name:"ディズニー 光るパズル",           icon:"✨", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう。くらくすると 光る"},
-  {id:"p14", name:"ディズニーの キャラクターの パズル", icon:"🐭", genre:"パズル", min:60, people:[1,2], age:[3,5], note:"大人よう"},
+  {id:"p01", name:"くもんのジグソーパズル（新幹線）",  icon:"🚄", genre:"パズル", min:20, people:[1,2], age:[1,3]},
+  {id:"p02", name:"むずかしい新幹線パズル",          icon:"🚅", genre:"パズル", min:45, people:[1,2], age:[3,5], note:"じっくりやるとき"},
+  {id:"p03", name:"日本地図のパズル",               icon:"🗾", genre:"パズル", min:20, people:[1,2], age:[2,4]},
+  {id:"p04", name:"すみっコぐらしパズル",            icon:"🐻‍❄️", genre:"パズル", min:30, people:[1,2], age:[2,4]},
+  {id:"p05", name:"どうぶつの型はめ",               icon:"🦁", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"小さい子むけ"},
+  {id:"p06", name:"トーマスの型はめ",               icon:"🚂", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"小さい子むけ"},
+  {id:"p07", name:"アンパンマンの型はめ",            icon:"🥯", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"小さい子むけ"},
+  {id:"p08", name:"トーマスパズル（小さい子用）",     icon:"🚃", genre:"パズル", min:10, people:[1,2], age:[0,1]},
+  {id:"p09", name:"プラレールのパズル（小さい子用）",  icon:"🛤️", genre:"パズル", min:10, people:[1,2], age:[0,1]},
+  {id:"p10", name:"のりものパズル（音が鳴る）",       icon:"🔊", genre:"パズル", min:10, people:[1,2], age:[0,1]},
+  {id:"p11", name:"東京パズル",                    icon:"🗼", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人用（むずかしい）"},
+  {id:"p12", name:"ディズニーパズル",               icon:"🏰", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人用（むずかしい）"},
+  {id:"p13", name:"ディズニー光るパズル",            icon:"✨", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人用。暗くすると光る"},
+  {id:"p14", name:"ディズニーのキャラクターのパズル",  icon:"🐭", genre:"パズル", min:60, people:[1,2], age:[3,5], note:"大人用"},
 
   // ▼ ブロック・レゴ
   {id:"l01", name:"レゴ",                          icon:"🧱", genre:"ブロック・レゴ", min:45, people:[1,4], age:[1,5]},
   {id:"l02", name:"ラキュー（LaQ）",                icon:"🔶", genre:"ブロック・レゴ", min:45, people:[1,4], age:[2,5]},
-  {id:"l03", name:"ドラえもんの ピタゴラ",          icon:"🔵", genre:"ブロック・レゴ", min:30, people:[1,2], age:[1,3]},
+  {id:"l03", name:"ドラえもんのピタゴラ",            icon:"🔵", genre:"ブロック・レゴ", min:30, people:[1,2], age:[1,3]},
+
+  // ▼ おえかき
+  {id:"d01", name:"手のよごれない色塩",              icon:"🧂", genre:"おえかき", min:15, people:[1,4], age:[1,3]},
+  {id:"d02", name:"クレヨン",                      icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d03", name:"かきかたマーカー8色",             icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,3]},
+  {id:"d04", name:"水性絵の具9色",                  icon:"🎨", genre:"おえかき", min:30, people:[1,4], age:[2,5], note:"じゅんびと片づけもあるよ"},
+  {id:"d05", name:"ハイクレヨン",                   icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d06", name:"水でおとせるクレヨン16色",         icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,2]},
+  {id:"d07", name:"クーピーペンシル6色",             icon:"✏️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d08", name:"ミニクレヨン16色",               icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d09", name:"水性ペン12色",                  icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d10", name:"すみっコぐらしのペン5色",          icon:"🐧", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d11", name:"スマイルペン3色",                icon:"😊", genre:"おえかき", min:15, people:[1,4], age:[1,4]},
+  {id:"d12", name:"ミッキーの色えんぴつ12色",         icon:"🐭", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d13", name:"さくらクレパス",                 icon:"🌸", genre:"おえかき", min:20, people:[1,4], age:[1,4], note:"ふみちゃんにもらった誕生日プレゼント"},
+
+  // ▼ 工作
+  {id:"k01", name:"おりがみ",                      icon:"🦢", genre:"工作", min:20, people:[1,4], age:[1,5]},
+  {id:"k02", name:"アイロンビーズ",                 icon:"🔴", genre:"工作", min:30, people:[1,4], age:[1,5], note:"アイロンはおうちの人と"},
 
   // ▼ のりもの
-  {id:"n01", name:"プラレール",                     icon:"🚃", genre:"のりもの", min:30, people:[1,4], age:[0,3], note:"レールを つなげて あそぶ"},
-
-  // ▼ こうさく
-  {id:"k01", name:"おりがみ",                       icon:"🦢", genre:"こうさく", min:20, people:[1,4], age:[1,5]},
-  {id:"k02", name:"アイロンビーズ",                 icon:"🔴", genre:"こうさく", min:30, people:[1,4], age:[1,5], note:"アイロンは おうちのひとと"},
-
-  // ▼ そとあそび
-  {id:"s01", name:"キャッチボール",                 icon:"⚾", genre:"そとあそび", min:30, people:[2,4], age:[1,5]},
-  {id:"s02", name:"なわとび",                       icon:"🪢", genre:"そとあそび", min:20, people:[1,4], age:[1,5]},
-  {id:"s03", name:"フリスビー",                     icon:"🥏", genre:"そとあそび", min:30, people:[2,4], age:[1,5]},
-  {id:"s04", name:"バドミントン",                   icon:"🏸", genre:"そとあそび", min:30, people:[2,4], age:[2,5]},
-  {id:"s05", name:"サッカー",                       icon:"⚽", genre:"そとあそび", min:45, people:[2,6], age:[1,5]},
-
-  // ▼ ゲームき
-  {id:"e01", name:"Nintendo Switch（スイッチ）",   icon:"🎮", genre:"ゲームき", min:30, people:[1,4], age:[1,5], note:"ソフトは あとで ついか"},
-  {id:"e02", name:"プレイステーション5（PS5）",     icon:"🕹️", genre:"ゲームき", min:30, people:[1,2], age:[2,5], note:"ソフトは あとで ついか"},
+  {id:"n01", name:"プラレール",                    icon:"🚃", genre:"のりもの", min:30, people:[1,4], age:[0,3], note:"レールをつなげて遊ぶ"},
 
   // ▼ ごっこあそび
-  {id:"o01", name:"てづくり フェルトの おままごとセット", icon:"🍳", genre:"ごっこあそび", min:30, people:[1,4], age:[0,2], note:"てづくり"},
+  {id:"o01", name:"手作りフェルトの おままごとセット", icon:"🍳", genre:"ごっこあそび", min:30, people:[1,4], age:[0,2], note:"手作り"},
 
-  // ▼ がくしゅう
-  {id:"g01", name:"ひらがな表",                     icon:"🔤", genre:"がくしゅう", min:10, people:[1,2], age:[0,2]},
-  {id:"g02", name:"あいうえお・カタカナ表（ボタンで 音が なる）", icon:"🔊", genre:"がくしゅう", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"}
+  // ▼ 学習
+  {id:"g01", name:"ひらがな表",                    icon:"🔤", genre:"学習", min:10, people:[1,2], age:[0,2]},
+  {id:"g02", name:"あいうえお・カタカナ表（ボタンで音が鳴る）", icon:"🔊", genre:"学習", min:10, people:[1,2], age:[0,1], note:"小さい子むけ"},
+
+  // ▼ 外あそび
+  {id:"s01", name:"キャッチボール",                 icon:"⚾", genre:"外あそび", min:30, people:[2,4], age:[1,5]},
+  {id:"s02", name:"なわとび",                      icon:"🪢", genre:"外あそび", min:20, people:[1,4], age:[1,5]},
+  {id:"s03", name:"フリスビー",                    icon:"🥏", genre:"外あそび", min:30, people:[2,4], age:[1,5]},
+  {id:"s04", name:"バドミントン",                  icon:"🏸", genre:"外あそび", min:30, people:[2,4], age:[2,5]},
+  {id:"s05", name:"サッカー",                      icon:"⚽", genre:"外あそび", min:45, people:[2,6], age:[1,5]},
+
+  // ▼ ゲーム機
+  {id:"e01", name:"Nintendo Switch（スイッチ）",    icon:"🎮", genre:"ゲーム機", min:30, people:[1,4], age:[1,5], note:"ソフトはあとで追加"},
+  {id:"e02", name:"プレイステーション5（PS5）",      icon:"🕹️", genre:"ゲーム機", min:30, people:[1,2], age:[2,5], note:"ソフトはあとで追加"}
 ];
 
-/* ジャンルごとの みため */
+/* ジャンルの表示順とアイコン */
 const GENRE_ICON = {
   "カードゲーム":"🃏","ボードゲーム":"🎲","パズル":"🧩","ブロック・レゴ":"🧱","おえかき":"🖍️",
-  "こうさく":"✂️","のりもの":"🚗","ごっこあそび":"🍳","がくしゅう":"🔤","ぬいぐるみ":"🧸","そとあそび":"⚽",
-  "ゲームき":"🎮","おんがく":"🎹","その他":"📦"
+  "工作":"✂️","のりもの":"🚗","ごっこあそび":"🍳","学習":"🔤","外あそび":"⚽",
+  "ゲーム機":"🎮","ぬいぐるみ":"🧸","おんがく":"🎹","その他":"📦"
 };
 
 /* =========================================================
-   ほぞん（ブラウザの なかに ついか分を のこす）
+   保存（この端末の追加・修正分）
    ========================================================= */
 const KEY = "omocha-list-v1";
-let extra = [];      // ついかした おもちゃ
-let removed = [];    // けした もとデータの id
+let extra = [];      // 追加したおもちゃ
+let removed = [];    // 削除した正本データの id
 
 function load(){
   try{
@@ -461,28 +500,27 @@ function allToys(){
 }
 
 /* =========================================================
-   しぼりこみの じょうたい
+   しぼりこみ
    ========================================================= */
 const TIMES = [
-  {v:10,  label:"10ぷん"},
-  {v:15,  label:"15ふん"},
-  {v:30,  label:"30ぷん"},
-  {v:60,  label:"1じかん"},
-  {v:120, label:"2じかん"},
-  {v:9999,label:"じかん たっぷり"}
+  {v:10,  label:"10分"},
+  {v:15,  label:"15分"},
+  {v:30,  label:"30分"},
+  {v:60,  label:"1時間"},
+  {v:120, label:"2時間"},
+  {v:9999,label:"時間たっぷり"}
 ];
 const PPLS = [
-  {v:0,label:"きにしない"},{v:1,label:"ひとり"},{v:2,label:"2人"},
-  {v:3,label:"3人"},{v:4,label:"4人"},{v:5,label:"5人いじょう"}
+  {v:0,label:"何人でも"},{v:1,label:"1人"},{v:2,label:"2人"},
+  {v:3,label:"3人"},{v:4,label:"4人"},{v:5,label:"5人以上"}
 ];
-/* としの めやす（0がいちばん ちいさい） */
 const LEVELS = [
-  {chip:"👶 ちいさい子", short:"ちいさい子", full:"0〜3さい（ようちえんの まえ）"},
-  {chip:"🧒 ようちえん",  short:"ようちえん", full:"ようちえん・ほいくえん"},
-  {chip:"1️⃣ 小1・2年",   short:"小1・2年",  full:"小学校 ていがくねん"},
-  {chip:"3️⃣ 小3・4年",   short:"小3・4年",  full:"小学校 ちゅうがくねん"},
-  {chip:"5️⃣ 小5・6年",   short:"小5・6年",  full:"小学校 こうがくねん"},
-  {chip:"🧑 大人",       short:"大人",     full:"大人"}
+  {chip:"👶 小さい子",  short:"小さい子",  full:"0〜3才（未就園）"},
+  {chip:"🧒 ようちえん", short:"ようちえん", full:"幼稚園・保育園"},
+  {chip:"1️⃣ 小1・2年",  short:"小1・2年",  full:"小学校低学年（1・2年）"},
+  {chip:"3️⃣ 小3・4年",  short:"小3・4年",  full:"小学校中学年（3・4年）"},
+  {chip:"5️⃣ 小5・6年",  short:"小5・6年",  full:"小学校高学年（5・6年）"},
+  {chip:"🧑 大人",      short:"大人",     full:"大人"}
 ];
 let state = { time:60, ppl:0, genre:"ぜんぶ", age:-1 };
 
@@ -505,20 +543,20 @@ function filtered(){
 }
 
 /* =========================================================
-   えがく
+   表示
    ========================================================= */
 const $ = s=>document.querySelector(s);
 
 function timeLabel(m){
   if(m>=60){
     const h = Math.floor(m/60), r = m%60;
-    return r ? `${h}じかん${r}ふん` : `${h}じかん`;
+    return r ? `${h}時間${r}分` : `${h}時間`;
   }
-  return `${m}ふん`;
+  return `${m}分`;
 }
 function pplLabel(p){
   const [a,b]=p;
-  if(a===b) return a===1 ? "ひとりで" : `${a}人で`;
+  if(a===b) return `${a}人`;
   return `${a}〜${b}人`;
 }
 function ageLabel(t){
@@ -534,13 +572,14 @@ function ageLabel(t){
 function renderChips(){
   $("#timeChips").innerHTML = TIMES.map(t=>
     `<button class="chip" data-t="${t.v}" aria-pressed="${state.time===t.v}">${t.label}</button>`).join("");
-  $("#pplChips").innerHTML = PPLS.map(p=>
-    `<button class="chip n" data-p="${p.v}" aria-pressed="${state.ppl===p.v}">${p.label}</button>`).join("");
 
   $("#ageChips").innerHTML =
-    `<button class="chip a" data-a="-1" aria-pressed="${state.age===-1}">🌈 だれでも</button>` +
+    `<button class="chip a" data-a="-1" aria-pressed="${state.age===-1}">だれでも</button>` +
     LEVELS.map((l,i)=>
       `<button class="chip a" data-a="${i}" aria-pressed="${state.age===i}" title="${l.full}">${l.chip}</button>`).join("");
+
+  $("#pplChips").innerHTML = PPLS.map(p=>
+    `<button class="chip n" data-p="${p.v}" aria-pressed="${state.ppl===p.v}">${p.label}</button>`).join("");
 
   const order = Object.keys(GENRE_ICON);
   const found = [...new Set(allToys().map(t=>t.genre))]
@@ -550,10 +589,9 @@ function renderChips(){
     });
   const genres = ["ぜんぶ", ...found];
   $("#genChips").innerHTML = genres.map(g=>
-    `<button class="chip g" data-g="${g}" aria-pressed="${state.genre===g}">${g==="ぜんぶ"?"🌈 ぜんぶ":(GENRE_ICON[g]||"📦")+" "+g}</button>`).join("");
+    `<button class="chip g" data-g="${g}" aria-pressed="${state.genre===g}">${g==="ぜんぶ"?"ぜんぶ":(GENRE_ICON[g]||"📦")+" "+g}</button>`).join("");
 
-  $("#genreList").innerHTML = [...new Set(allToys().map(t=>t.genre))]
-    .map(g=>`<option value="${g}">`).join("");
+  $("#genreList").innerHTML = found.map(g=>`<option value="${g}">`).join("");
 }
 
 function renderList(){
@@ -561,21 +599,17 @@ function renderList(){
   $("#cnt").textContent = list.length;
   $("#grid").innerHTML = list.map(t=>`
     <div class="toy ${t.mine?"mine":""}">
-      <button class="edit" data-edit="${t.id}" title="なおす">✏️</button>
-      <div class="top">
-        <div class="icon">${t.icon||GENRE_ICON[t.genre]||"📦"}</div>
-        <div class="name">${esc(t.name)}</div>
+      <button class="edit" data-edit="${t.id}" title="修正する">✏️</button>
+      <div class="line">
+        <span class="nm">${t.icon||GENRE_ICON[t.genre]||"📦"} ${esc(t.name)}</span>
+        <span class="dots"></span>
+        <span class="tm">${timeLabel(t.min)}</span>
       </div>
+      <div class="meta">👦 ${pplLabel(t.people)}　🎂 ${ageLabel(t)}　${GENRE_ICON[t.genre]||"📦"} ${esc(t.genre)}</div>
       ${t.note?`<div class="note">${esc(t.note)}</div>`:""}
-      <div class="tags">
-        <span class="tag time">⏰ ${timeLabel(t.min)}</span>
-        <span class="tag age">🎂 ${ageLabel(t)}</span>
-        <span class="tag ppl">👦 ${pplLabel(t.people)}</span>
-        <span class="tag gen">${GENRE_ICON[t.genre]||"📦"} ${esc(t.genre)}</span>
-      </div>
     </div>`).join("");
   $("#emptyBox").innerHTML = list.length ? "" :
-    `<div class="empty">🥲 その じょうけんで あそべる おもちゃは ないみたい。<br>じかんか にんずうを かえてみてね。</div>`;
+    `<div class="empty">この条件で遊べるおもちゃが見つかりません。<br>時間や人数を変えてみてください。</div>`;
 }
 
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -583,7 +617,7 @@ function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&l
 function render(){ renderChips(); renderList(); }
 
 /* =========================================================
-   ルーレット と くみあわせ
+   ルーレットとプラン
    ========================================================= */
 $("#pickBtn").onclick = ()=>{
   const list = filtered();
@@ -599,10 +633,10 @@ $("#pickBtn").onclick = ()=>{
     box.innerHTML = `<div class="ic">${t.icon||"📦"}</div><div class="big">${esc(t.name)}</div>`;
     if(++n>12){
       clearInterval(spin);
-      box.innerHTML = `<div style="font-size:14px;color:#a06318">きょうは これで あそぼう！</div>
+      box.innerHTML = `<div class="small">TODAY'S PICK</div>
         <div class="ic">${t.icon||"📦"}</div>
         <div class="big">${esc(t.name)}</div>
-        <div style="font-size:15px;color:#a06318">⏰ ${timeLabel(t.min)} ／ 👦 ${pplLabel(t.people)}</div>`;
+        <div class="meta">⏰ ${timeLabel(t.min)}　👦 ${pplLabel(t.people)}</div>`;
     }
   }, 70);
 };
@@ -613,7 +647,6 @@ $("#planBtn").onclick = ()=>{
   const pool = filtered().filter(t=>t.min<=limit);
   if(!pool.length){ $("#plan").innerHTML=""; return; }
 
-  // のこり じかんに はいるものを ランダムに つみあげる
   const chosen = [];
   let rest = limit;
   const bag = pool.slice();
@@ -629,24 +662,22 @@ $("#planBtn").onclick = ()=>{
   const used = chosen.reduce((s,t)=>s+t.min,0);
   $("#plan").innerHTML = `
     <div class="planbox">
-      <h3>🧩 ${timeLabel(limit)} あるなら、この じゅんばん！</h3>
-      <div class="steps">
-        ${chosen.map((t,i)=>`
-          <div class="step">
-            <div class="no">${i+1}</div>
-            <div class="nm">${t.icon||"📦"} ${esc(t.name)}</div>
-            <div class="tm">${timeLabel(t.min)}</div>
-          </div>`).join("")}
-      </div>
-      <div class="plantotal">ぜんぶで ${timeLabel(used)}（のこり ${timeLabel(limit-used)}）</div>
-      <div style="text-align:right;margin-top:8px">
-        <button class="btn green" onclick="document.getElementById('planBtn').click()">🔁 べつの くみあわせ</button>
+      <h3>${timeLabel(limit)}あるなら、この順番で</h3>
+      ${chosen.map((t,i)=>`
+        <div class="step">
+          <div class="no">${i+1}</div>
+          <div class="nm">${t.icon||"📦"} ${esc(t.name)}</div>
+          <div class="tm">${timeLabel(t.min)}</div>
+        </div>`).join("")}
+      <div class="plantotal">合計 ${timeLabel(used)}${limit-used>0?`（のこり ${timeLabel(limit-used)}）`:""}</div>
+      <div class="again">
+        <button class="btn teal" onclick="document.getElementById('planBtn').click()">🔁 別の組み合わせ</button>
       </div>
     </div>`;
 };
 
 /* =========================================================
-   そうさ
+   操作
    ========================================================= */
 document.addEventListener("click", e=>{
   const c = e.target.closest(".chip");
@@ -663,7 +694,7 @@ document.addEventListener("click", e=>{
   if(ed) openDialog(ed.dataset.edit);
 });
 
-/* ついか・へんしゅう */
+/* 追加・修正 */
 let editingId = null;
 function openDialog(id){
   editingId = id||null;
@@ -673,7 +704,7 @@ function openDialog(id){
   $("#ageTo").innerHTML = opts;
   f.reset();
   const t = id ? allToys().find(x=>x.id===id) : null;
-  $("#dlgTitle").textContent = t ? "おもちゃを なおす" : "おもちゃを ふやす";
+  $("#dlgTitle").textContent = t ? "おもちゃを修正" : "おもちゃを追加";
   $("#delBtn").style.display = t ? "" : "none";
   if(t){
     f.name.value=t.name; f.icon.value=t.icon||""; f.genre.value=t.genre;
@@ -693,7 +724,7 @@ $("#form").addEventListener("submit", e=>{
   const v = e.submitter?.value;
   if(v==="cancel") return;
   if(v==="delete"){
-    if(!confirm("この おもちゃを けしますか？")){ e.preventDefault(); return; }
+    if(!confirm("このおもちゃを削除しますか？")){ e.preventDefault(); return; }
     if(editingId.startsWith("u")) extra = extra.filter(t=>t.id!==editingId);
     else if(!removed.includes(editingId)) removed.push(editingId);
     save(); render(); return;
@@ -720,12 +751,12 @@ $("#form").addEventListener("submit", e=>{
   save(); render();
 });
 
-/* かきだし・よみこみ */
+/* 書き出し・読み込み */
 $("#exportBtn").onclick = ()=>{
   const blob = new Blob([JSON.stringify({extra,removed},null,2)],{type:"application/json"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "おもちゃひょう_データ.json";
+  a.download = "おもちゃメニュー_データ.json";
   a.click();
 };
 $("#importBtn").onclick = ()=>$("#fileInput").click();
@@ -736,21 +767,18 @@ $("#fileInput").onchange = e=>{
     try{
       const o = JSON.parse(r.result);
       extra = o.extra||[]; removed = o.removed||[];
-      save(); render(); alert("よみこみ できました！");
-    }catch(err){ alert("よみこめませんでした…"); }
+      save(); render(); alert("読み込みました");
+    }catch(err){ alert("読み込めませんでした"); }
   };
   r.readAsText(file);
 };
 $("#resetBtn").onclick = ()=>{
-  if(!confirm("ついかした ぶんを ぜんぶ けして、さいしょの じょうたいに もどしますか？")) return;
+  if(!confirm("追加した分をすべて消して、最初の状態にもどしますか？")) return;
   extra=[]; removed=[]; save(); render();
 };
 
-/* しゅつりょく */
-load(); render();
-
 /* =========================================================
-   いんさつ（A4よこ・左右2だんの メニュー）
+   印刷（A4横・左右2段のメニュー）
    ========================================================= */
 function buildPrint(onlyFiltered){
   const list  = onlyFiltered ? filtered() : allToys();
@@ -763,9 +791,9 @@ function buildPrint(onlyFiltered){
 
   const cond = [];
   if(onlyFiltered){
-    cond.push(state.time===9999 ? "じかん：たっぷり" : `${timeLabel(state.time)}まで`);
+    cond.push(state.time===9999 ? "時間たっぷり" : `${timeLabel(state.time)}まで`);
     if(state.age>=0) cond.push(LEVELS[state.age].full);
-    if(state.ppl)    cond.push(state.ppl===1?"ひとり":`${state.ppl}人`);
+    if(state.ppl)    cond.push(`${state.ppl}人`);
     if(state.genre!=="ぜんぶ") cond.push(state.genre);
   }
 
@@ -789,21 +817,21 @@ function buildPrint(onlyFiltered){
 
   $("#printSheet").innerHTML = `
     <div class="p-head">
-      <h1>🧸 おもちゃ メニュー</h1>
+      <h1>おもちゃメニュー</h1>
       <div class="p-sub">
-        <span>⏰＝あそぶ じかんの めやす　👦＝にんずう　🎂＝としの めやす</span>
+        <span>⏰＝遊ぶ時間のめやす　👦＝人数　🎂＝年齢のめやす</span>
         <span>${list.length}こ${cond.length?"／"+cond.join("・"):""}</span>
       </div>
     </div>
     <div class="p-cols">${body}</div>
-    <div class="p-foot">まよったら、じかんの みじかい ものから えらんでみてね</div>`;
+    <div class="p-foot">まよったら、時間の短いものからえらんでみてね</div>`;
 }
 $("#printAllBtn").onclick    = ()=>{ buildPrint(false); window.print(); };
 $("#printFilterBtn").onclick = ()=>{ buildPrint(true);  window.print(); };
-/* ブラウザのメニューから いんさつ したときも 中身が 入っているように */
-buildPrint(false);
 window.addEventListener("beforeprint", ()=>{ if(!$("#printSheet").innerHTML.trim()) buildPrint(false); });
 
+/* 起動 */
+load(); render(); buildPrint(false);
 </script>
 </body>
 </html>
