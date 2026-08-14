@@ -289,6 +289,7 @@ const SEED = [
   {id:"c16", name:"人生ゲーム（かんいばん）",        icon:"🚙", genre:"カードゲーム", min:45, people:[2,4]},
   {id:"c17", name:"レクサスカード（コースター）",     icon:"🥤", genre:"カードゲーム", min:5,  people:[1,4], note:"あそぶというより コースター"},
   {id:"c18", name:"てづくり カードゲーム",          icon:"✂️", genre:"カードゲーム", min:15, people:[2,4], note:"じぶんで つくったやつ"},
+  {id:"c19", name:"ポケモンカードゲーム",           icon:"⚡", genre:"カードゲーム", min:30, people:[2,2]},
 
   // ▼ おえかき
   {id:"d01", name:"手の よごれない いろしお ※かくにん中", icon:"🧂", genre:"おえかき", min:15, people:[1,4], note:"なまえ かくにん中"},
@@ -313,13 +314,50 @@ const SEED = [
   {id:"b05", name:"カタン",                        icon:"🏝️", genre:"ボードゲーム", min:60, people:[3,4], note:"じかんが あるときに"},
   {id:"b06", name:"ジェンガ",                      icon:"🗼", genre:"ボードゲーム", min:15, people:[2,6]},
   {id:"b07", name:"アルファベット ペアードカード",    icon:"🔤", genre:"ボードゲーム", min:15, people:[1,4], note:"えいごで あそべる"},
-  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], note:"えいごの ゲーム"}
+  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], note:"えいごの ゲーム"},
+  {id:"b09", name:"すみっコぐらし ワクワクパーティーゲーム", icon:"🐧", genre:"ボードゲーム", min:30, people:[2,4]},
+  {id:"b10", name:"トーマスの すごろく",            icon:"🚂", genre:"ボードゲーム", min:20, people:[2,4]},
+  {id:"b11", name:"ワクワク せかいりょこう すごろく", icon:"🌍", genre:"ボードゲーム", min:45, people:[2,4]},
+  {id:"b12", name:"ワクワク ゲームセット",           icon:"🎁", genre:"ボードゲーム", min:30, people:[2,4], note:"いろんなゲームが 入ってる"},
+
+  // ▼ パズル
+  {id:"p01", name:"くもんの ジグソーパズル（しんかんせん）", icon:"🚄", genre:"パズル", min:20, people:[1,2]},
+  {id:"p02", name:"むずかしい しんかんせんパズル",   icon:"🚅", genre:"パズル", min:45, people:[1,2], note:"がっつり やるとき"},
+  {id:"p03", name:"日本ちずの パズル",              icon:"🗾", genre:"パズル", min:20, people:[1,2]},
+  {id:"p04", name:"すみっコぐらし パズル",          icon:"🐻‍❄️", genre:"パズル", min:30, people:[1,2]},
+  {id:"p05", name:"どうぶつの かたはめ",            icon:"🦁", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p06", name:"トーマスの かたはめ",            icon:"🚂", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p07", name:"アンパンマンの かたはめ",        icon:"🥯", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p08", name:"トーマスパズル（ちいさい子よう）", icon:"🚃", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p09", name:"プラレールの パズル（ちいさい子よう）", icon:"🛤️", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p10", name:"のりものパズル（音が なる）",     icon:"🔊", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
+  {id:"p11", name:"東京パズル",                     icon:"🗼", genre:"パズル", min:90, people:[1,2], note:"大人よう（むずかしい）"},
+  {id:"p12", name:"ディズニー パズル",              icon:"🏰", genre:"パズル", min:90, people:[1,2], note:"大人よう（むずかしい）"},
+  {id:"p13", name:"ディズニー 光るパズル",           icon:"✨", genre:"パズル", min:90, people:[1,2], note:"大人よう。くらくすると 光る"},
+  {id:"p14", name:"ディズニーの キャラクターの パズル", icon:"🐭", genre:"パズル", min:60, people:[1,2], note:"大人よう"},
+
+  // ▼ ブロック・レゴ
+  {id:"l01", name:"レゴ",                          icon:"🧱", genre:"ブロック・レゴ", min:45, people:[1,4]},
+  {id:"l02", name:"ラキュー（LaQ）",                icon:"🔶", genre:"ブロック・レゴ", min:45, people:[1,4]},
+  {id:"l03", name:"ドラえもんの ピタゴラ",          icon:"🔵", genre:"ブロック・レゴ", min:30, people:[1,2]},
+
+  // ▼ のりもの
+  {id:"n01", name:"プラレール",                     icon:"🚃", genre:"のりもの", min:30, people:[1,4], note:"レールを つなげて あそぶ"},
+
+  // ▼ こうさく
+  {id:"k01", name:"おりがみ",                       icon:"🦢", genre:"こうさく", min:20, people:[1,4]},
+  {id:"k02", name:"アイロンビーズ",                 icon:"🔴", genre:"こうさく", min:30, people:[1,4], note:"アイロンは おうちのひとと"},
+
+  // ▼ がくしゅう
+  {id:"g01", name:"ひらがな表",                     icon:"🔤", genre:"がくしゅう", min:10, people:[1,2]},
+  {id:"g02", name:"あいうえお・カタカナ表（ボタンで 音が なる）", icon:"🔊", genre:"がくしゅう", min:10, people:[1,2], note:"ちいさい子むけ"}
 ];
 
 /* ジャンルごとの みため */
 const GENRE_ICON = {
-  "カードゲーム":"🃏","おえかき":"🖍️","ボードゲーム":"🎲","ブロック・レゴ":"🧱","ぬいぐるみ":"🧸",
-  "のりもの":"🚗","そとあそび":"⚽","こうさく":"✂️","ゲームき":"🎮","おんがく":"🎹","その他":"📦"
+  "カードゲーム":"🃏","ボードゲーム":"🎲","パズル":"🧩","ブロック・レゴ":"🧱","おえかき":"🖍️",
+  "こうさく":"✂️","のりもの":"🚗","がくしゅう":"🔤","ぬいぐるみ":"🧸","そとあそび":"⚽",
+  "ゲームき":"🎮","おんがく":"🎹","その他":"📦"
 };
 
 /* =========================================================
@@ -395,7 +433,13 @@ function renderChips(){
   $("#pplChips").innerHTML = PPLS.map(p=>
     `<button class="chip n" data-p="${p.v}" aria-pressed="${state.ppl===p.v}">${p.label}</button>`).join("");
 
-  const genres = ["ぜんぶ", ...new Set(allToys().map(t=>t.genre))];
+  const order = Object.keys(GENRE_ICON);
+  const found = [...new Set(allToys().map(t=>t.genre))]
+    .sort((a,b)=>{
+      const ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia<0?99:ia) - (ib<0?99:ib);
+    });
+  const genres = ["ぜんぶ", ...found];
   $("#genChips").innerHTML = genres.map(g=>
     `<button class="chip g" data-g="${g}" aria-pressed="${state.genre===g}">${g==="ぜんぶ"?"🌈 ぜんぶ":(GENRE_ICON[g]||"📦")+" "+g}</button>`).join("");
 
