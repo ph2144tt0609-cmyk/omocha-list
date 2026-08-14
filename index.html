@@ -63,6 +63,7 @@
   .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 0 #d96a22;font-weight:bold}
   .chip.g[aria-pressed="true"]{background:var(--accent2);border-color:var(--accent2);box-shadow:0 2px 0 #2e8d82}
   .chip.n[aria-pressed="true"]{background:var(--accent3);border-color:var(--accent3);box-shadow:0 2px 0 #3f68be}
+  .chip.a[aria-pressed="true"]{background:#b06fd4;border-color:#b06fd4;color:#fff;box-shadow:0 2px 0 #8b4fae;font-weight:bold}
 
   .row{margin-bottom:14px}
   .row:last-child{margin-bottom:0}
@@ -103,6 +104,7 @@
   .tag.time{background:#fff3e6;color:#b6620f;border-color:#ffdcb8;font-weight:bold}
   .tag.ppl{background:#e9f2ff;color:#3a5ea8;border-color:#cfe0ff}
   .tag.gen{background:#e6f7f4;color:#2b7d72;border-color:#c6ece5}
+  .tag.age{background:#f6ecfb;color:#7c3fa3;border-color:#e6d2f2}
   .toy .edit{
     position:absolute;top:8px;right:8px;background:none;border:none;font-size:16px;
     cursor:pointer;opacity:.35;padding:4px;
@@ -187,6 +189,10 @@
       <div class="chips" id="timeChips"></div>
     </div>
     <div class="row">
+      <div class="label">🎂 だれが あそぶ？（としの めやす）</div>
+      <div class="chips" id="ageChips"></div>
+    </div>
+    <div class="row">
       <div class="label">👦 なんにんで あそぶ？</div>
       <div class="chips" id="pplChips"></div>
     </div>
@@ -250,6 +256,12 @@
     <label class="f">にんずう（さいしょう〜さいだい）
       <input name="people" placeholder="2-6" pattern="\d+(-\d+)?" required>
     </label>
+    <label class="f">としの めやす（この としから）
+      <select name="ageFrom" id="ageFrom"></select>
+    </label>
+    <label class="f">としの めやす（この としまで）
+      <select name="ageTo" id="ageTo"></select>
+    </label>
     <label class="f">メモ（なくてもOK）
       <input name="note" maxlength="60" placeholder="れい：ぜんぶで 108まい">
     </label>
@@ -271,90 +283,97 @@
    ========================================================= */
 const SEED = [
   // ▼ カードゲーム（手書き1ページ目のとおり）
-  {id:"c01", name:"DOBBLE（ドブル）",            icon:"🌀", genre:"カードゲーム", min:10, people:[2,8], note:"こっちゃんの"},
-  {id:"c02", name:"さおん ※なまえ かくにん中",     icon:"❓", genre:"カードゲーム", min:15, people:[2,4], note:"よみとれず。ただしい なまえを おしえて"},
-  {id:"c03", name:"UNO",                        icon:"🎴", genre:"カードゲーム", min:20, people:[2,10]},
-  {id:"c04", name:"なんじゃもんじゃ",              icon:"👾", genre:"カードゲーム", min:10, people:[2,6]},
-  {id:"c05", name:"しぜんかんさつカルタ",          icon:"🍃", genre:"カードゲーム", min:15, people:[2,6]},
-  {id:"c06", name:"ディズニー カルタ",             icon:"🏰", genre:"カードゲーム", min:15, people:[2,6]},
-  {id:"c07", name:"トランプ",                     icon:"♠️", genre:"カードゲーム", min:20, people:[2,6], note:"ババぬき・しんけいすいじゃく など"},
-  {id:"c08", name:"にほん カルタ ※かくにん中",      icon:"🗾", genre:"カードゲーム", min:15, people:[2,6]},
-  {id:"c09", name:"Flight chess（フライトチェス）", icon:"✈️", genre:"カードゲーム", min:30, people:[2,4]},
-  {id:"c10", name:"黒ひげ危機一発",                icon:"🏴‍☠️", genre:"カードゲーム", min:10, people:[2,4]},
-  {id:"c11", name:"モノポリー",                    icon:"🏦", genre:"カードゲーム", min:90, people:[2,6], note:"がっつり あそぶとき"},
-  {id:"c12", name:"ワンピース カードゲーム",        icon:"🏴", genre:"カードゲーム", min:30, people:[2,2]},
-  {id:"c13", name:"中日ドラゴンズ カードゲーム",     icon:"⚾", genre:"カードゲーム", min:20, people:[2,4]},
-  {id:"c14", name:"大人の トランプ",               icon:"🎩", genre:"カードゲーム", min:20, people:[2,6]},
-  {id:"c15", name:"ママの つくった ことばあつめカード", icon:"✍️", genre:"カードゲーム", min:15, people:[1,4], note:"てづくり"},
-  {id:"c16", name:"人生ゲーム（かんいばん）",        icon:"🚙", genre:"カードゲーム", min:45, people:[2,4]},
-  {id:"c17", name:"レクサスカード（コースター）",     icon:"🥤", genre:"カードゲーム", min:5,  people:[1,4], note:"あそぶというより コースター"},
-  {id:"c18", name:"てづくり カードゲーム",          icon:"✂️", genre:"カードゲーム", min:15, people:[2,4], note:"じぶんで つくったやつ"},
-  {id:"c19", name:"ポケモンカードゲーム",           icon:"⚡", genre:"カードゲーム", min:30, people:[2,2]},
+  {id:"c01", name:"DOBBLE（ドブル）",            icon:"🌀", genre:"カードゲーム", min:10, people:[2,8], age:[1,5], note:"こっちゃんの"},
+  {id:"c02", name:"きおん",                        icon:"🧠", genre:"カードゲーム", min:15, people:[2,4], age:[1,5], note:"きおくりょくの ゲーム"},
+  {id:"c03", name:"UNO",                        icon:"🎴", genre:"カードゲーム", min:20, people:[2,10], age:[1,5]},
+  {id:"c04", name:"なんじゃもんじゃ",              icon:"👾", genre:"カードゲーム", min:10, people:[2,6], age:[1,5]},
+  {id:"c05", name:"しぜんかんさつカルタ",          icon:"🍃", genre:"カードゲーム", min:15, people:[2,6], age:[1,3]},
+  {id:"c06", name:"ディズニー カルタ",             icon:"🏰", genre:"カードゲーム", min:15, people:[2,6], age:[1,3]},
+  {id:"c07", name:"トランプ",                     icon:"♠️", genre:"カードゲーム", min:20, people:[2,6], age:[1,5], note:"ババぬき・しんけいすいじゃく など"},
+  {id:"c08", name:"にほん カルタ ※かくにん中",      icon:"🗾", genre:"カードゲーム", min:15, people:[2,6], age:[2,4]},
+  {id:"c09", name:"Flight chess（フライトチェス）", icon:"✈️", genre:"カードゲーム", min:30, people:[2,4], age:[2,5]},
+  {id:"c10", name:"黒ひげ危機一発",                icon:"🏴‍☠️", genre:"カードゲーム", min:10, people:[2,4], age:[1,4]},
+  {id:"c11", name:"モノポリー",                    icon:"🏦", genre:"カードゲーム", min:90, people:[2,6], age:[3,5], note:"がっつり あそぶとき"},
+  {id:"c12", name:"ワンピース カードゲーム",        icon:"🏴", genre:"カードゲーム", min:30, people:[2,2], age:[3,5]},
+  {id:"c13", name:"中日ドラゴンズ カードゲーム",     icon:"⚾", genre:"カードゲーム", min:20, people:[2,4], age:[2,4]},
+  {id:"c14", name:"大人の トランプ",               icon:"🎩", genre:"カードゲーム", min:20, people:[2,6], age:[4,5]},
+  {id:"c15", name:"ママの つくった ことばあつめカード", icon:"✍️", genre:"カードゲーム", min:15, people:[1,4], age:[1,3], note:"てづくり"},
+  {id:"c16", name:"人生ゲーム（かんいばん）",        icon:"🚙", genre:"カードゲーム", min:45, people:[2,4], age:[1,4]},
+  {id:"c17", name:"レクサスカード（コースター）",     icon:"🥤", genre:"カードゲーム", min:5,  people:[1,4], age:[1,5], note:"あそぶというより コースター"},
+  {id:"c18", name:"てづくり カードゲーム",          icon:"✂️", genre:"カードゲーム", min:15, people:[2,4], age:[1,4], note:"じぶんで つくったやつ"},
+  {id:"c19", name:"ポケモンカードゲーム",           icon:"⚡", genre:"カードゲーム", min:30, people:[2,2], age:[2,5]},
 
   // ▼ おえかき
-  {id:"d01", name:"手の よごれない いろしお ※かくにん中", icon:"🧂", genre:"おえかき", min:15, people:[1,4], note:"なまえ かくにん中"},
-  {id:"d02", name:"クレヨン",                      icon:"🖍️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d03", name:"かきかたマーカー 8色",           icon:"🖊️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d04", name:"すいせい絵の具 9色",             icon:"🎨", genre:"おえかき", min:30, people:[1,4], note:"じゅんびと かたづけも あるよ"},
-  {id:"d05", name:"ハイクレヨン",                  icon:"🖍️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d06", name:"水で おとせる クレヨン 16色",     icon:"🖍️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d07", name:"クーピーペンシル 6色",           icon:"✏️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d08", name:"ミニクレヨン 16色",              icon:"🖍️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d09", name:"すいせいペン 12色",              icon:"🖊️", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d10", name:"すみっコぐらしの ペン 5色",       icon:"🐧", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d11", name:"スマイルペン 3色",               icon:"😊", genre:"おえかき", min:15, people:[1,4]},
-  {id:"d12", name:"ミッキーの 色えんぴつ 12色",      icon:"🐭", genre:"おえかき", min:20, people:[1,4]},
-  {id:"d13", name:"さくらクレパス",                 icon:"🌸", genre:"おえかき", min:20, people:[1,4], note:"ふみちゃんに もらった たんじょうびプレゼント"},
+  {id:"d01", name:"手の よごれない いろしお ※かくにん中", icon:"🧂", genre:"おえかき", min:15, people:[1,4], age:[1,3], note:"なまえ かくにん中"},
+  {id:"d02", name:"クレヨン",                      icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d03", name:"かきかたマーカー 8色",           icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,3]},
+  {id:"d04", name:"すいせい絵の具 9色",             icon:"🎨", genre:"おえかき", min:30, people:[1,4], age:[2,5], note:"じゅんびと かたづけも あるよ"},
+  {id:"d05", name:"ハイクレヨン",                  icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d06", name:"水で おとせる クレヨン 16色",     icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,2]},
+  {id:"d07", name:"クーピーペンシル 6色",           icon:"✏️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d08", name:"ミニクレヨン 16色",              icon:"🖍️", genre:"おえかき", min:20, people:[1,4], age:[0,3]},
+  {id:"d09", name:"すいせいペン 12色",              icon:"🖊️", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d10", name:"すみっコぐらしの ペン 5色",       icon:"🐧", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d11", name:"スマイルペン 3色",               icon:"😊", genre:"おえかき", min:15, people:[1,4], age:[1,4]},
+  {id:"d12", name:"ミッキーの 色えんぴつ 12色",      icon:"🐭", genre:"おえかき", min:20, people:[1,4], age:[1,4]},
+  {id:"d13", name:"さくらクレパス",                 icon:"🌸", genre:"おえかき", min:20, people:[1,4], age:[1,4], note:"ふみちゃんに もらった たんじょうびプレゼント"},
 
   // ▼ ボードゲーム
-  {id:"b01", name:"ママの つくった てづくりオセロ",   icon:"⚫", genre:"ボードゲーム", min:20, people:[2,2], note:"てづくり"},
-  {id:"b02", name:"くもんの しょうぎ",              icon:"♟️", genre:"ボードゲーム", min:30, people:[2,2]},
-  {id:"b03", name:"えいきゅうに あそべるパズル 脳ブロック", icon:"🧩", genre:"ボードゲーム", min:20, people:[1,2]},
-  {id:"b04", name:"ウボンゴ",                      icon:"🔷", genre:"ボードゲーム", min:30, people:[2,4]},
-  {id:"b05", name:"カタン",                        icon:"🏝️", genre:"ボードゲーム", min:60, people:[3,4], note:"じかんが あるときに"},
-  {id:"b06", name:"ジェンガ",                      icon:"🗼", genre:"ボードゲーム", min:15, people:[2,6]},
-  {id:"b07", name:"アルファベット ペアードカード",    icon:"🔤", genre:"ボードゲーム", min:15, people:[1,4], note:"えいごで あそべる"},
-  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], note:"えいごの ゲーム"},
-  {id:"b09", name:"すみっコぐらし ワクワクパーティーゲーム", icon:"🐧", genre:"ボードゲーム", min:30, people:[2,4]},
-  {id:"b10", name:"トーマスの すごろく",            icon:"🚂", genre:"ボードゲーム", min:20, people:[2,4]},
-  {id:"b11", name:"ワクワク せかいりょこう すごろく", icon:"🌍", genre:"ボードゲーム", min:45, people:[2,4]},
-  {id:"b12", name:"ワクワク ゲームセット",           icon:"🎁", genre:"ボードゲーム", min:30, people:[2,4], note:"いろんなゲームが 入ってる"},
-  {id:"b13", name:"野球盤",                        icon:"⚾", genre:"ボードゲーム", min:30, people:[2,4]},
+  {id:"b01", name:"ママの つくった てづくりオセロ",   icon:"⚫", genre:"ボードゲーム", min:20, people:[2,2], age:[2,5], note:"てづくり"},
+  {id:"b02", name:"くもんの しょうぎ",              icon:"♟️", genre:"ボードゲーム", min:30, people:[2,2], age:[2,5]},
+  {id:"b03", name:"えいきゅうに あそべるパズル 脳ブロック", icon:"🧩", genre:"ボードゲーム", min:20, people:[1,2], age:[2,5]},
+  {id:"b04", name:"ウボンゴ",                      icon:"🔷", genre:"ボードゲーム", min:30, people:[2,4], age:[2,5]},
+  {id:"b05", name:"カタン",                        icon:"🏝️", genre:"ボードゲーム", min:60, people:[3,4], age:[3,5], note:"じかんが あるときに"},
+  {id:"b06", name:"ジェンガ",                      icon:"🗼", genre:"ボードゲーム", min:15, people:[2,6], age:[1,5]},
+  {id:"b07", name:"アルファベット ペアードカード",    icon:"🔤", genre:"ボードゲーム", min:15, people:[1,4], age:[1,3], note:"えいごで あそべる"},
+  {id:"b08", name:"ブレインボックス",               icon:"🧠", genre:"ボードゲーム", min:20, people:[1,4], age:[2,5], note:"えいごの ゲーム"},
+  {id:"b09", name:"すみっコぐらし ワクワクパーティーゲーム", icon:"🐧", genre:"ボードゲーム", min:30, people:[2,4], age:[1,3]},
+  {id:"b10", name:"トーマスの すごろく",            icon:"🚂", genre:"ボードゲーム", min:20, people:[2,4], age:[0,2]},
+  {id:"b11", name:"ワクワク せかいりょこう すごろく", icon:"🌍", genre:"ボードゲーム", min:45, people:[2,4], age:[2,4]},
+  {id:"b12", name:"ワクワク ゲームセット",           icon:"🎁", genre:"ボードゲーム", min:30, people:[2,4], age:[1,4], note:"いろんなゲームが 入ってる"},
+  {id:"b13", name:"野球盤",                        icon:"⚾", genre:"ボードゲーム", min:30, people:[2,4], age:[1,5]},
 
   // ▼ パズル
-  {id:"p01", name:"くもんの ジグソーパズル（しんかんせん）", icon:"🚄", genre:"パズル", min:20, people:[1,2]},
-  {id:"p02", name:"むずかしい しんかんせんパズル",   icon:"🚅", genre:"パズル", min:45, people:[1,2], note:"がっつり やるとき"},
-  {id:"p03", name:"日本ちずの パズル",              icon:"🗾", genre:"パズル", min:20, people:[1,2]},
-  {id:"p04", name:"すみっコぐらし パズル",          icon:"🐻‍❄️", genre:"パズル", min:30, people:[1,2]},
-  {id:"p05", name:"どうぶつの かたはめ",            icon:"🦁", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p06", name:"トーマスの かたはめ",            icon:"🚂", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p07", name:"アンパンマンの かたはめ",        icon:"🥯", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p08", name:"トーマスパズル（ちいさい子よう）", icon:"🚃", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p09", name:"プラレールの パズル（ちいさい子よう）", icon:"🛤️", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p10", name:"のりものパズル（音が なる）",     icon:"🔊", genre:"パズル", min:10, people:[1,2], note:"ちいさい子むけ"},
-  {id:"p11", name:"東京パズル",                     icon:"🗼", genre:"パズル", min:90, people:[1,2], note:"大人よう（むずかしい）"},
-  {id:"p12", name:"ディズニー パズル",              icon:"🏰", genre:"パズル", min:90, people:[1,2], note:"大人よう（むずかしい）"},
-  {id:"p13", name:"ディズニー 光るパズル",           icon:"✨", genre:"パズル", min:90, people:[1,2], note:"大人よう。くらくすると 光る"},
-  {id:"p14", name:"ディズニーの キャラクターの パズル", icon:"🐭", genre:"パズル", min:60, people:[1,2], note:"大人よう"},
+  {id:"p01", name:"くもんの ジグソーパズル（しんかんせん）", icon:"🚄", genre:"パズル", min:20, people:[1,2], age:[1,3]},
+  {id:"p02", name:"むずかしい しんかんせんパズル",   icon:"🚅", genre:"パズル", min:45, people:[1,2], age:[3,5], note:"がっつり やるとき"},
+  {id:"p03", name:"日本ちずの パズル",              icon:"🗾", genre:"パズル", min:20, people:[1,2], age:[2,4]},
+  {id:"p04", name:"すみっコぐらし パズル",          icon:"🐻‍❄️", genre:"パズル", min:30, people:[1,2], age:[2,4]},
+  {id:"p05", name:"どうぶつの かたはめ",            icon:"🦁", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p06", name:"トーマスの かたはめ",            icon:"🚂", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p07", name:"アンパンマンの かたはめ",        icon:"🥯", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p08", name:"トーマスパズル（ちいさい子よう）", icon:"🚃", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p09", name:"プラレールの パズル（ちいさい子よう）", icon:"🛤️", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p10", name:"のりものパズル（音が なる）",     icon:"🔊", genre:"パズル", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"},
+  {id:"p11", name:"東京パズル",                     icon:"🗼", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう（むずかしい）"},
+  {id:"p12", name:"ディズニー パズル",              icon:"🏰", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう（むずかしい）"},
+  {id:"p13", name:"ディズニー 光るパズル",           icon:"✨", genre:"パズル", min:90, people:[1,2], age:[4,5], note:"大人よう。くらくすると 光る"},
+  {id:"p14", name:"ディズニーの キャラクターの パズル", icon:"🐭", genre:"パズル", min:60, people:[1,2], age:[3,5], note:"大人よう"},
 
   // ▼ ブロック・レゴ
-  {id:"l01", name:"レゴ",                          icon:"🧱", genre:"ブロック・レゴ", min:45, people:[1,4]},
-  {id:"l02", name:"ラキュー（LaQ）",                icon:"🔶", genre:"ブロック・レゴ", min:45, people:[1,4]},
-  {id:"l03", name:"ドラえもんの ピタゴラ",          icon:"🔵", genre:"ブロック・レゴ", min:30, people:[1,2]},
+  {id:"l01", name:"レゴ",                          icon:"🧱", genre:"ブロック・レゴ", min:45, people:[1,4], age:[1,5]},
+  {id:"l02", name:"ラキュー（LaQ）",                icon:"🔶", genre:"ブロック・レゴ", min:45, people:[1,4], age:[2,5]},
+  {id:"l03", name:"ドラえもんの ピタゴラ",          icon:"🔵", genre:"ブロック・レゴ", min:30, people:[1,2], age:[1,3]},
 
   // ▼ のりもの
-  {id:"n01", name:"プラレール",                     icon:"🚃", genre:"のりもの", min:30, people:[1,4], note:"レールを つなげて あそぶ"},
+  {id:"n01", name:"プラレール",                     icon:"🚃", genre:"のりもの", min:30, people:[1,4], age:[0,3], note:"レールを つなげて あそぶ"},
 
   // ▼ こうさく
-  {id:"k01", name:"おりがみ",                       icon:"🦢", genre:"こうさく", min:20, people:[1,4]},
-  {id:"k02", name:"アイロンビーズ",                 icon:"🔴", genre:"こうさく", min:30, people:[1,4], note:"アイロンは おうちのひとと"},
+  {id:"k01", name:"おりがみ",                       icon:"🦢", genre:"こうさく", min:20, people:[1,4], age:[1,5]},
+  {id:"k02", name:"アイロンビーズ",                 icon:"🔴", genre:"こうさく", min:30, people:[1,4], age:[1,5], note:"アイロンは おうちのひとと"},
+
+  // ▼ そとあそび
+  {id:"s01", name:"キャッチボール",                 icon:"⚾", genre:"そとあそび", min:30, people:[2,4], age:[1,5]},
+  {id:"s02", name:"なわとび",                       icon:"🪢", genre:"そとあそび", min:20, people:[1,4], age:[1,5]},
+  {id:"s03", name:"フリスビー",                     icon:"🥏", genre:"そとあそび", min:30, people:[2,4], age:[1,5]},
+  {id:"s04", name:"バドミントン",                   icon:"🏸", genre:"そとあそび", min:30, people:[2,4], age:[2,5]},
+  {id:"s05", name:"サッカー",                       icon:"⚽", genre:"そとあそび", min:45, people:[2,6], age:[1,5]},
 
   // ▼ ごっこあそび
-  {id:"o01", name:"てづくり フェルトの おままごとセット", icon:"🍳", genre:"ごっこあそび", min:30, people:[1,4], note:"てづくり"},
+  {id:"o01", name:"てづくり フェルトの おままごとセット", icon:"🍳", genre:"ごっこあそび", min:30, people:[1,4], age:[0,2], note:"てづくり"},
 
   // ▼ がくしゅう
-  {id:"g01", name:"ひらがな表",                     icon:"🔤", genre:"がくしゅう", min:10, people:[1,2]},
-  {id:"g02", name:"あいうえお・カタカナ表（ボタンで 音が なる）", icon:"🔊", genre:"がくしゅう", min:10, people:[1,2], note:"ちいさい子むけ"}
+  {id:"g01", name:"ひらがな表",                     icon:"🔤", genre:"がくしゅう", min:10, people:[1,2], age:[0,2]},
+  {id:"g02", name:"あいうえお・カタカナ表（ボタンで 音が なる）", icon:"🔊", genre:"がくしゅう", min:10, people:[1,2], age:[0,1], note:"ちいさい子むけ"}
 ];
 
 /* ジャンルごとの みため */
@@ -399,17 +418,32 @@ const PPLS = [
   {v:0,label:"きにしない"},{v:1,label:"ひとり"},{v:2,label:"2人"},
   {v:3,label:"3人"},{v:4,label:"4人"},{v:5,label:"5人いじょう"}
 ];
-let state = { time:60, ppl:0, genre:"ぜんぶ" };
+/* としの めやす（0がいちばん ちいさい） */
+const LEVELS = [
+  {chip:"👶 ちいさい子", short:"ちいさい子", full:"0〜3さい（ようちえんの まえ）"},
+  {chip:"🧒 ようちえん",  short:"ようちえん", full:"ようちえん・ほいくえん"},
+  {chip:"1️⃣ 小1・2年",   short:"小1・2年",  full:"小学校 ていがくねん"},
+  {chip:"3️⃣ 小3・4年",   short:"小3・4年",  full:"小学校 ちゅうがくねん"},
+  {chip:"5️⃣ 小5・6年",   short:"小5・6年",  full:"小学校 こうがくねん"},
+  {chip:"🧑 大人",       short:"大人",     full:"大人"}
+];
+let state = { time:60, ppl:0, genre:"ぜんぶ", age:-1 };
 
+function ageOf(t){ return Array.isArray(t.age) ? t.age : [1,5]; }
 function fitTime(t){ return t.min <= state.time; }
 function fitPpl(t){
   if(!state.ppl) return true;
   const [a,b] = t.people;
   return state.ppl>=a && state.ppl<=b;
 }
+function fitAge(t){
+  if(state.age<0) return true;
+  const [a,b] = ageOf(t);
+  return state.age>=a && state.age<=b;
+}
 function fitGenre(t){ return state.genre==="ぜんぶ" || t.genre===state.genre; }
 function filtered(){
-  return allToys().filter(t=>fitTime(t)&&fitPpl(t)&&fitGenre(t))
+  return allToys().filter(t=>fitTime(t)&&fitPpl(t)&&fitAge(t)&&fitGenre(t))
                   .sort((a,b)=>a.min-b.min || a.name.localeCompare(b.name,"ja"));
 }
 
@@ -430,12 +464,26 @@ function pplLabel(p){
   if(a===b) return a===1 ? "ひとりで" : `${a}人で`;
   return `${a}〜${b}人`;
 }
+function ageLabel(t){
+  const [a,b] = ageOf(t);
+  if(a===b) return LEVELS[a].short;
+  if(a===2 && b===4) return "小学生";
+  if(a===2 && b===5) return "小学生〜大人";
+  if(a===1 && b===5) return "ようちえん〜大人";
+  if(a===0 && b===5) return "だれでも";
+  return `${LEVELS[a].short}〜${LEVELS[b].short}`;
+}
 
 function renderChips(){
   $("#timeChips").innerHTML = TIMES.map(t=>
     `<button class="chip" data-t="${t.v}" aria-pressed="${state.time===t.v}">${t.label}</button>`).join("");
   $("#pplChips").innerHTML = PPLS.map(p=>
     `<button class="chip n" data-p="${p.v}" aria-pressed="${state.ppl===p.v}">${p.label}</button>`).join("");
+
+  $("#ageChips").innerHTML =
+    `<button class="chip a" data-a="-1" aria-pressed="${state.age===-1}">🌈 だれでも</button>` +
+    LEVELS.map((l,i)=>
+      `<button class="chip a" data-a="${i}" aria-pressed="${state.age===i}" title="${l.full}">${l.chip}</button>`).join("");
 
   const order = Object.keys(GENRE_ICON);
   const found = [...new Set(allToys().map(t=>t.genre))]
@@ -464,6 +512,7 @@ function renderList(){
       ${t.note?`<div class="note">${esc(t.note)}</div>`:""}
       <div class="tags">
         <span class="tag time">⏰ ${timeLabel(t.min)}</span>
+        <span class="tag age">🎂 ${ageLabel(t)}</span>
         <span class="tag ppl">👦 ${pplLabel(t.people)}</span>
         <span class="tag gen">${GENRE_ICON[t.genre]||"📦"} ${esc(t.genre)}</span>
       </div>
@@ -547,6 +596,7 @@ document.addEventListener("click", e=>{
   if(c){
     if(c.dataset.t!==undefined) state.time = +c.dataset.t;
     if(c.dataset.p!==undefined) state.ppl  = +c.dataset.p;
+    if(c.dataset.a!==undefined) state.age  = +c.dataset.a;
     if(c.dataset.g!==undefined) state.genre = c.dataset.g;
     $("#pick").innerHTML=""; $("#plan").innerHTML="";
     render();
@@ -561,6 +611,9 @@ let editingId = null;
 function openDialog(id){
   editingId = id||null;
   const f = $("#form");
+  const opts = LEVELS.map((l,i)=>`<option value="${i}">${l.full}</option>`).join("");
+  $("#ageFrom").innerHTML = opts;
+  $("#ageTo").innerHTML = opts;
   f.reset();
   const t = id ? allToys().find(x=>x.id===id) : null;
   $("#dlgTitle").textContent = t ? "おもちゃを なおす" : "おもちゃを ふやす";
@@ -569,8 +622,11 @@ function openDialog(id){
     f.name.value=t.name; f.icon.value=t.icon||""; f.genre.value=t.genre;
     f.min.value=t.min; f.people.value=t.people[0]===t.people[1]?t.people[0]:t.people.join("-");
     f.note.value=t.note||"";
+    const [a,b]=ageOf(t); f.ageFrom.value=a; f.ageTo.value=b;
   }else{
     f.genre.value = state.genre==="ぜんぶ" ? "" : state.genre;
+    f.ageFrom.value = state.age<0 ? 1 : state.age;
+    f.ageTo.value = 5;
   }
   $("#dlg").showModal();
 }
@@ -594,6 +650,7 @@ $("#form").addEventListener("submit", e=>{
     genre: f.genre.value.trim(),
     min: +f.min.value,
     people: [p[0], p[1]??p[0]],
+    age: [Math.min(+f.ageFrom.value,+f.ageTo.value), Math.max(+f.ageFrom.value,+f.ageTo.value)],
     note: f.note.value.trim(),
     mine: true
   };
