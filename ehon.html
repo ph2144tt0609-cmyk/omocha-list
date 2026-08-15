@@ -12,16 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f4efe4;
-    --panel:#fdfbf5;
-    --ink:#2c261e;
-    --deep:#262019;
-    --cream:#f2ead8;
-    --muted:#8d8371;
-    --line:#e3dac4;
-    --hair:#ece5d2;
-    --accent:#a8552b;
-    --gold:#b99149;
+    --bg:#f4efe4; --panel:#fdfbf5; --ink:#2c261e; --deep:#262019; --cream:#f2ead8;
+    --muted:#8d8371; --line:#e3dac4; --hair:#ece5d2; --accent:#a8552b; --gold:#b99149;
     --radius:14px;
     --serif:"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
     --en:"Cormorant Garamond",serif;
@@ -30,44 +22,29 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
   body{
-    background:
-      radial-gradient(1200px 400px at 50% -100px, rgba(185,145,73,.06), transparent),
-      var(--bg);
-    color:var(--ink);
-    font-family:var(--gothic);
-    font-size:15.5px;line-height:1.8;
-    padding-bottom:72px;
+    background:radial-gradient(1200px 400px at 50% -100px, rgba(185,145,73,.06), transparent), var(--bg);
+    color:var(--ink); font-family:var(--gothic); font-size:15.5px; line-height:1.8; padding-bottom:72px;
   }
-  .wrap{max-width:840px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   a{color:inherit}
+  button{font-family:inherit}
 
   header{
-    background:
-      radial-gradient(900px 300px at 50% 120%, rgba(185,145,73,.18), transparent),
-      var(--deep);
-    color:var(--cream);
-    text-align:center;padding:52px 16px 46px;
+    background:radial-gradient(900px 300px at 50% 120%, rgba(185,145,73,.18), transparent), var(--deep);
+    color:var(--cream); text-align:center; padding:52px 16px 46px;
   }
-  .ovl{
-    display:block;font-family:var(--en);font-size:14px;letter-spacing:.55em;
-    text-indent:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;
-  }
-  header h1{
-    margin:0;font-family:var(--serif);font-weight:600;
-    font-size:38px;letter-spacing:.2em;text-indent:.2em;color:var(--cream);
-  }
-  .orn{
-    display:flex;align-items:center;gap:14px;justify-content:center;
-    margin:18px auto 12px;color:var(--gold);width:min(360px,70%);
-  }
+  .ovl{display:block;font-family:var(--en);font-size:14px;letter-spacing:.55em;
+    text-indent:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+  header h1{margin:0;font-family:var(--serif);font-weight:600;font-size:38px;
+    letter-spacing:.2em;text-indent:.2em;color:var(--cream)}
+  .orn{display:flex;align-items:center;gap:14px;justify-content:center;
+    margin:18px auto 12px;color:var(--gold);width:min(360px,70%)}
   .orn::before,.orn::after{content:"";flex:1;border-top:1px solid rgba(185,145,73,.45)}
   .orn span{font-size:9px}
   header p{margin:0;font-size:13px;color:rgba(242,234,216,.75);letter-spacing:.2em;text-indent:.2em}
 
-  .back{
-    text-align:center;margin:18px 0 0;font-size:13.5px;letter-spacing:.06em;
-  }
+  .back{text-align:center;margin:18px 0 0;font-size:13.5px;letter-spacing:.06em}
   .back a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
   .back a:hover{color:var(--ink);border-color:var(--ink)}
 
@@ -75,37 +52,37 @@
     display:flex;align-items:baseline;gap:10px;justify-content:center;
     margin:26px 0 0;color:var(--muted);font-size:14px;letter-spacing:.06em;
   }
-  .countbar b{
-    font-family:var(--en);font-style:italic;font-weight:500;
-    font-size:40px;color:var(--accent);line-height:1;
-  }
+  .countbar b{font-family:var(--en);font-style:italic;font-weight:500;
+    font-size:40px;color:var(--accent);line-height:1}
 
-  .gsec{margin-top:34px}
-  .ghead{
-    display:flex;align-items:baseline;gap:14px;
-    border-bottom:3px double var(--line);padding-bottom:7px;margin-bottom:4px;
+  .filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+  .chip{
+    appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);
+    border-radius:999px;padding:7px 16px;font-size:13.5px;cursor:pointer;letter-spacing:.03em;
+    transition:border-color .15s, background .15s, color .15s;
   }
-  .ghead h2{
-    margin:0;font-family:var(--serif);font-weight:600;
-    font-size:21px;letter-spacing:.12em;
-  }
-  .ghead .gcount{
-    margin-left:auto;font-family:var(--en);font-style:italic;
-    font-size:15px;color:var(--muted);letter-spacing:.05em;
-  }
+  .chip:hover{border-color:#c9bd9e}
+  .chip[aria-pressed="true"]{background:var(--deep);border-color:var(--deep);color:var(--cream)}
+
+  .gsec{margin-top:36px}
+  .ghead{display:flex;align-items:baseline;gap:14px;
+    border-bottom:3px double var(--line);padding-bottom:7px;margin-bottom:4px}
+  .ghead h2{margin:0;font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.12em}
+  .ghead .gcount{margin-left:auto;font-family:var(--en);font-style:italic;
+    font-size:15px;color:var(--muted);letter-spacing:.05em}
+
   ul.books{list-style:none;margin:0;padding:0}
-  ul.books li{
-    display:flex;align-items:baseline;gap:10px;
-    padding:9px 4px;border-bottom:1px solid var(--hair);
-  }
+  ul.books li{padding:13px 4px;border-bottom:1px solid var(--hair)}
   ul.books li:last-child{border-bottom:none}
-  .bname{font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.04em}
-  .bnote{color:var(--muted);font-size:12.5px;margin-left:auto;text-align:right;flex-shrink:0;max-width:46%}
-  .qmark{
-    display:inline-block;font-size:11px;color:var(--accent);
-    border:1px solid var(--accent);border-radius:999px;padding:0 8px;margin-left:8px;
-    letter-spacing:.05em;vertical-align:2px;white-space:nowrap;
-  }
+  .btitle{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .bname{font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.04em}
+  .bmeta{font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:.02em}
+  .brec{font-size:13.5px;color:#5f5849;margin-top:4px;line-height:1.72}
+  .badge{display:inline-block;font-size:11px;border-radius:999px;padding:1px 10px;
+    letter-spacing:.05em;white-space:nowrap;vertical-align:2px}
+  .b-box{background:var(--deep);color:var(--cream)}
+  .b-keep{border:1px solid var(--gold);color:#8a6a2a}
+  .b-q{border:1px solid var(--accent);color:var(--accent)}
 
   .panel{
     background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -114,30 +91,28 @@
   }
   .panel b{color:var(--ink)}
 
-  footer{
-    text-align:center;margin-top:46px;color:var(--muted);
-    font-size:12px;letter-spacing:.14em;
-  }
+  footer{text-align:center;margin-top:46px;color:var(--muted);font-size:12px;letter-spacing:.14em}
   footer .fo{display:block;color:var(--gold);font-size:9px;margin-bottom:8px}
 
-  /* ===== 印刷（A4縦・2段） ===== */
   @page{ size:A4 portrait; margin:12mm; }
   @media print{
     body{background:#fff;color:#000;font-size:9.5pt;line-height:1.4;padding:0}
-    header,.back,.panel,footer{display:none !important}
-    .wrap{max-width:none;padding:0;column-count:2;column-gap:9mm;column-rule:.6pt solid #ccc}
-    .countbar{display:block;column-span:all;text-align:left;margin:0 0 6pt;
+    header,.back,.panel,.filters,footer{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .countbar{display:block;text-align:left;margin:0 0 6pt;
       border-bottom:2pt solid #333;padding-bottom:4pt;font-size:9pt;color:#555}
     .countbar b{font-size:16pt;color:#000;margin-right:4pt}
-    .countbar::before{content:"えほんの いちらん　";font-family:var(--serif);font-size:15pt;font-weight:600;color:#000;letter-spacing:.15em}
-    .gsec{margin:0 0 8pt;break-inside:avoid-column}
+    .countbar::before{content:"えほんの いちらん　";font-family:var(--serif);
+      font-size:15pt;font-weight:600;color:#000;letter-spacing:.15em}
+    .gsec{margin:0 0 8pt;break-inside:avoid}
     .ghead{border-bottom:1.6pt double #666;padding-bottom:2pt;margin-bottom:2pt}
     .ghead h2{font-size:11.5pt}
     .ghead .gcount{font-size:8.5pt;color:#666}
-    ul.books li{padding:2.2pt 0;border-bottom:.6pt dotted #bbb;break-inside:avoid}
+    ul.books li{padding:3pt 0;border-bottom:.6pt dotted #bbb;break-inside:avoid}
     .bname{font-size:9.5pt}
-    .bnote{font-size:7.5pt;color:#666}
-    .qmark{font-size:7pt;border-color:#999;color:#555;padding:0 4pt}
+    .bmeta{font-size:7pt;color:#666}
+    .brec{font-size:7.8pt;color:#333;margin-top:1pt}
+    .badge{font-size:6.5pt;border:.6pt solid #666;color:#333;background:#fff !important;padding:0 3pt}
   }
 </style>
 </head>
@@ -152,17 +127,25 @@
 
 <div class="wrap">
 
-  <p class="back"><a href="seiri.html">&#128230; えほんの あずけかた（箱づめリスト）</a>　&nbsp;&nbsp;<a href="./">← おもちゃメニューへ もどる</a></p>
+  <p class="back">
+    <a href="seiri.html">📦 えほんの ほかん（箱づめリスト）</a>　&nbsp;
+    <a href="./">← おもちゃメニューへ もどる</a>
+  </p>
 
   <div class="countbar"><b id="total">0</b>さつ あります</div>
+
+  <div class="filters" id="filters"></div>
 
   <div id="list"></div>
 
   <section class="panel">
-    <b>（？）マークについて</b><br>
-    背表紙の写真から読みとった本です。（？）が付いているものは自信がないので、
-    ちがっていたら教えてください。棚のおくに隠れていて載っていない本もあるはず——
-    背表紙が見えるように写真を撮って送ってもらえれば、この一覧に追加します。
+    <b>この一覧について</b><br>
+    表紙・背表紙の写真から読み取り、作者名と刊行情報はネットで確認したものです。
+    <span class="badge b-q">？</span> は読み取りに自信がない本、
+    <span class="badge b-keep">棚</span> は8さいの今こそ棚に置いておきたい本、
+    <span class="badge b-box">箱①</span> のような印は
+    <a href="seiri.html" style="border-bottom:1px solid var(--line)">オリコンにしまう本</a>です。
+    ちがっていたら教えてください。載っていない本は表紙の写真を送ってもらえれば追加します。
   </section>
 
 </div>
@@ -172,114 +155,285 @@
 <script>
 /* =========================================================
    えほんデータ（正本）
-   cat = 分類 / q:1 = 背表紙の読み取りに自信なし（？表示）
+   cat=分類 / by=作者・出版社 / age=対象年齢のめやす
+   rec=おすすめの一言 / box=しまうオリコン番号 / keep=1 棚に残す・0 大人の本棚へ
+   q=読み取り不確実
    ========================================================= */
 const EHON = [
-  // ▼ ずかん・ちしきのほん
-  {cat:"ずかん・ちしきのほん", name:"ポケモン大図鑑1020＋", note:"1025ひき ぜんぶのってる"},
-  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 昆虫", note:"ドラえもんのDVDつき"},
-  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 宇宙", note:"ドラえもんのDVDつき"},
-  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 星と星座", note:"ドラえもんのDVDつき"},
-  {cat:"ずかん・ちしきのほん", name:"はじめてのずかん はたらくくるま"},
-  {cat:"ずかん・ちしきのほん", name:"2さい まるごとひゃっか"},
-  {cat:"ずかん・ちしきのほん", name:"きかんしゃトーマス キャラクターコレクション", note:"超ひみつゲット！"},
-  {cat:"ずかん・ちしきのほん", name:"プラレールコレクション2021", note:"超ひみつゲット！"},
-  {cat:"ずかん・ちしきのほん", name:"図鑑NEOの まんがの本", q:1, note:"タイトルよみとれず"},
 
-  // ▼ あそべるほん
-  {cat:"あそべるほん", name:"ウォーリーをさがせ！ きえた名画だいそうさく！", note:"さがしっこ"},
-  {cat:"あそべるほん", name:"トリックアート工作", note:"作って ふしぎ！"},
-  {cat:"あそべるほん", name:"サファリへ いこう！", note:"てざわりえほん"},
-  {cat:"あそべるほん", name:"親子であそぶ たのしいきりがみ", note:"きりがみ"},
-  {cat:"あそべるほん", name:"かならず作れる ユニット折り紙", note:"多面体をつくる"},
-  {cat:"あそべるほん", name:"3〜5才のおりがみ", note:"おかあさんといっしょ"},
-  {cat:"あそべるほん", name:"男の子のおりがみ", note:"かっこいい作品ずらり"},
-  {cat:"あそべるほん", name:"あやとりで あそぼ！", note:"あやとりひも4本つき"},
-  {cat:"あそべるほん", name:"ポップ・アップ（ゆびあそびシリーズ⑩）", note:"ゆびあそび"},
+  /* ▼ ずかん・ちしきのほん */
+  {cat:"ずかん・ちしきのほん", name:"ポケモン大図鑑1020＋", by:"小学館のカラーワイド", age:"5さい〜", keep:1,
+   rec:"1025ひきを全部タイプ別に収録。進化・メガシンカ・リージョンフォームが見開きで並ぶので、字が読めるようになった今がいちばん面白い。"},
+  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 昆虫", by:"小学館／ドラえもんDVDつき", age:"4さい〜", keep:1,
+   rec:"虫とりから帰ってすぐ引ける定番。DVDは動きが見られるので、図鑑だけより記憶に残る。"},
+  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 宇宙", by:"小学館／ドラえもんDVDつき", age:"5さい〜", keep:1,
+   rec:"「うちゅうえんそく」やキャンプの星空とつなげて読むと一気に入り込める1冊。"},
+  {cat:"ずかん・ちしきのほん", name:"小学館の図鑑NEO 星と星座", by:"小学館／DVDつき", age:"5さい〜", keep:1,
+   rec:"キャンプの夜に持っていける図鑑。その日見える星座を実際に探す使い方がいちばん効く。"},
+  {cat:"ずかん・ちしきのほん", name:"はじめてのずかん900", by:"講談社／おしゃべりタッチペン式", age:"1〜6さい", box:3,
+   rec:"ペンで押すと日本語と英語で読み上げる図鑑。長く使えるぶん電池が入りっぱなしになりやすいので、しまう前に必ず抜く。"},
+  {cat:"ずかん・ちしきのほん", name:"はじめてのずかん はたらくくるま", by:"高橋書店／小賀野実 監修", age:"2〜5さい", box:3,
+   rec:"大きな写真で車種がはっきり分かる。工事現場の前を通るたびに開くことになる本。"},
+  {cat:"ずかん・ちしきのほん", name:"はじめてのずかん でんしゃ", by:"高橋書店／山崎友也 監修", age:"2〜5さい", box:3,
+   rec:"新幹線から在来線まで大きな写真で。大井川鐵道に乗る前後に開くと盛り上がる。"},
+  {cat:"ずかん・ちしきのほん", name:"2さい まるごとひゃっか", by:"ひかりのくに", age:"1〜3さい", box:2,
+   rec:"ことば・かず・生活習慣が1冊に。「これなに？」が続く時期をまるごと引き受けてくれる。"},
+  {cat:"ずかん・ちしきのほん", name:"きかんしゃトーマス キャラクターコレクション", by:"ポプラ社／超ひみつゲット！", age:"3〜6さい", box:3,
+   rec:"トーマスの仲間を全部覚えたい時期の本。名前を言い合う遊びに使える。"},
+  {cat:"ずかん・ちしきのほん", name:"プラレールコレクション2021", by:"ポプラ社／超ひみつゲット！", age:"3〜6さい",
+   rec:"2021年版なので内容が古くなっていく帯。処分してもよい枠。"},
+  {cat:"ずかん・ちしきのほん", name:"トミカ・プラレール ハイパーシリーズ しゅつどう！", by:"—", age:"3〜6さい",
+   rec:"変形して合体するシリーズの本。おもちゃを持っているうちが花。"},
+  {cat:"ずかん・ちしきのほん", name:"図鑑NEOの まんがの本", by:"小学館", age:"5さい〜", q:1,
+   rec:"タイトルが読み取れていない1冊。まんが形式で入りやすいシリーズ。"},
 
-  // ▼ ものがたりの えほん
-  {cat:"ものがたりの えほん", name:"そらまめくんの まいにちは たからもの"},
-  {cat:"ものがたりの えほん", name:"くまのコールテンくん"},
-  {cat:"ものがたりの えほん", name:"からすのパンやさん"},
-  {cat:"ものがたりの えほん", name:"おべんとうバス"},
-  {cat:"ものがたりの えほん", name:"いちばん しあわせな おくりもの"},
-  {cat:"ものがたりの えほん", name:"ひかりの石"},
-  {cat:"ものがたりの えほん", name:"わんわん丘のゆかいな昔話"},
-  {cat:"ものがたりの えほん", name:"わんぱくだんの クリスマスのおはなし", q:1},
-  {cat:"ものがたりの えほん", name:"カラーモンスター きもちは なにいろ？"},
-  {cat:"ものがたりの えほん", name:"おんなじ おんなじ"},
-  {cat:"ものがたりの えほん", name:"しんせつな ともだち"},
-  {cat:"ものがたりの えほん", name:"とりかえっこ"},
-  {cat:"ものがたりの えほん", name:"くれよんのくろくん"},
-  {cat:"ものがたりの えほん", name:"やさいのがっこう（キャベツくんの おはなし）", q:1},
-  {cat:"ものがたりの えほん", name:"まるてん いろてん"},
-  {cat:"ものがたりの えほん", name:"お？かお！"},
-  {cat:"ものがたりの えほん", name:"たんじょうび おめでとう"},
-  {cat:"ものがたりの えほん", name:"ここから 〜がんばるあなたに〜", q:1},
+  /* ▼ あそべるほん */
+  {cat:"あそべるほん", name:"ウォーリーをさがせ！ きえた名画だいそうさく！", by:"マーティン・ハンドフォード／フレーベル館", age:"4さい〜", keep:1,
+   rec:"一人でも延々ねばれる。旅行や病院の待ち時間にいちばん強い1冊。"},
+  {cat:"あそべるほん", name:"トリックアート工作", by:"—", age:"6さい〜", keep:1,
+   rec:"読むだけでなく作って人を驚かせられる。8さいの手先なら自分で完成まで持っていける。"},
+  {cat:"あそべるほん", name:"かならず作れる ユニット折り紙", by:"北條敏彰／日本文芸社", age:"8さい〜", keep:1,
+   rec:"同じパーツを何枚も折って多面体に組む。今の年齢がちょうど挑戦しがいのある難度。"},
+  {cat:"あそべるほん", name:"男の子のおりがみ", by:"山田勝久／池田書店", age:"5さい〜", keep:1,
+   rec:"恐竜・手裏剣・乗り物など「かっこいい」寄りの作品集。折り紙を続ける動機になる。"},
+  {cat:"あそべるほん", name:"あやとりで あそぼ！", by:"あやとりひも4本つき", age:"5さい〜", keep:1,
+   rec:"ひもが付いていて買い足し不要。ふたりあやとりまで載っていて、向かい合って遊べる。"},
+  {cat:"あそべるほん", name:"親子であそぶ たのしいきりがみ", by:"小林一夫 監修／池田書店", age:"4さい〜", keep:1,
+   rec:"はさみが安全に使えるようになったら。折って切って開く瞬間がいちばん盛り上がる。"},
+  {cat:"あそべるほん", name:"ポップ・アップ（ゆびあそびシリーズ⑩）", by:"—", age:"3さい〜", q:1,
+   rec:"指を使った遊びの本。作者名が読み取れていない。"},
+  {cat:"あそべるほん", name:"3〜5才のおりがみ", by:"おかあさんといっしょ", age:"3〜5さい", box:2,
+   rec:"折り線が大きく印刷された入門編。棚には「男の子のおりがみ」を残せば役割が重複しない。"},
+  {cat:"あそべるほん", name:"アンパンマンを さがせ！①", by:"やなせたかし 原作／フレーベル館", age:"2〜5さい", box:2,
+   rec:"ウォーリーの幼児版。字が読めなくても一人で長く遊べる。"},
+  {cat:"あそべるほん", name:"トミカ めいろブック", by:"—", age:"3〜5さい", box:3,
+   rec:"迷路40種。指でなぞるだけなので、鉛筆を持つ前でも遊べる。"},
+  {cat:"あそべるほん", name:"まるかいて ちょん（えかきうた）", by:"—", age:"3〜5さい", box:3,
+   rec:"歌いながら描くと絵になる。絵が苦手でも「描けた」体験ができる。"},
+  {cat:"あそべるほん", name:"サファリへ いこう！", by:"ミキハウス／てざわりえほん", age:"0〜2さい", box:1,
+   rec:"ざらざら・ふわふわを指で触る絵本。目より先に手が育つ時期に反応がいい。"},
 
-  // ▼ こどものとも（福音館の月刊絵本・号数順）
-  {cat:"こどものとも（げっかんえほん）", name:"おやすみしりとり", note:"1月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"みっつのふえを もらった ヤーノシュ", note:"2月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"はいくどうぶつえん", note:"3月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"いい はが はえる おまじない", note:"4月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"ステッドのホテル", note:"5月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"うちゅうえんそく", note:"6月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"かわの なかでは", note:"7月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"よなかの こうえん", note:"8月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"ロンドンの でんしゃに のって", note:"9月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"げたばこマンション", note:"10月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"エゾシカ", note:"11月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"トムとモモ", note:"12月号"},
-  {cat:"こどものとも（げっかんえほん）", name:"ふゆに さがそう いいもの いくつ？", note:"ちいさなかがくのとも 12月号"},
+  /* ▼ ものがたりの えほん */
+  {cat:"ものがたりの えほん", name:"からすのパンやさん", by:"かこさとし／偕成社", age:"3さい〜", keep:1,
+   rec:"見開きいっぱいに並ぶ80種のパンが主役。何度読んでも「どれ食べたい？」で必ず止まる。"},
+  {cat:"ものがたりの えほん", name:"くまのコールテンくん", by:"ドン・フリーマン／まつおかきょうこ 訳／偕成社", age:"3さい〜", box:3,
+   rec:"ボタンの取れたぬいぐるみが、自分を選んでくれる子に出会う話。売り物でなく友だちになる瞬間が沁みる。"},
+  {cat:"ものがたりの えほん", name:"くれよんのくろくん", by:"なかやみわ／童心社", age:"3さい〜", keep:1,
+   rec:"要らない色だと思われていた黒が、最後に主役になる。誰にも役割があると分かる1冊。"},
+  {cat:"ものがたりの えほん", name:"そらまめくんの まいにちは たからもの", by:"なかやみわ／小学館", age:"3さい〜", keep:1,
+   rec:"そらまめくんシリーズ。何でもない一日が宝物だと気づかせる、大人の方が刺さる話。"},
+  {cat:"ものがたりの えほん", name:"カラーモンスター きもちは なにいろ？", by:"アナ・イェナス／永岡書店", age:"3さい〜", keep:1,
+   rec:"ごちゃまぜの感情を色で分けていく本。「今どんな気持ち？」を言葉にする練習になる。"},
+  {cat:"ものがたりの えほん", name:"いちばん しあわせな おくりもの", by:"宮野聡子／教育画劇", age:"4さい〜", keep:1,
+   rec:"贈りものは物じゃない、と静かに伝わる話。誕生日やクリスマスの前に読みたい。"},
+  {cat:"ものがたりの えほん", name:"ひかりの石", by:"—", age:"4さい〜", q:1,
+   rec:"棚から読み取った1冊。タイトル未確定。"},
+  {cat:"ものがたりの えほん", name:"わんわん丘のゆかいな昔話", by:"—", age:"5さい〜",
+   rec:"短い昔話がいくつも入った本。1話ずつ寝る前に読める。"},
+  {cat:"ものがたりの えほん", name:"わんぱくだんの クリスマスのおはなし", by:"ゆきのゆみこ・上野与志／ひさかたチャイルド", age:"4さい〜", q:1,
+   rec:"3人組が異世界に迷い込むシリーズ。季節の行事に合わせて読むと効く。"},
+  {cat:"ものがたりの えほん", name:"しんせつな ともだち", by:"方軼羣 作／君島久子 訳／福音館書店", age:"4さい〜", keep:1,
+   rec:"食べ物を「あの子にも」と回していったら一周して戻ってくる話。やさしさの連鎖がきれいに見える。"},
+  {cat:"ものがたりの えほん", name:"やさいのがっこう（キャベツくんの おはなし）", by:"なかやみわ／白泉社", age:"3さい〜", q:1,
+   rec:"野菜が学校に通うシリーズ。好き嫌いの入り口としても使える。"},
+  {cat:"ものがたりの えほん", name:"4ばんめの えきは くまごろうえき", by:"野本淳一 ぶん／田中秀幸 え／小峰書店", age:"3〜6さい", box:3,
+   rec:"駅に「くまごろう」の名が付いたわけを辿る、のりものえほん。電車好きの子に。"},
+  {cat:"ものがたりの えほん", name:"いろいろバス", by:"tupera tupera／大日本図書", age:"2〜4さい", box:2,
+   rec:"色とりどりのバスに何が乗ってくるかを当てる。次のページを予想する楽しさが詰まっている。"},
+  {cat:"ものがたりの えほん", name:"おべんとうバス", by:"真珠まりこ／ひさかたチャイルド", age:"1〜3さい", box:2,
+   rec:"「はーい」と返事をしておかずが乗り込む。子どもが一緒に返事をしはじめる定番。"},
+  {cat:"ものがたりの えほん", name:"とりかえっこ", by:"さとうわきこ／ポプラ社", age:"2〜4さい",
+   rec:"ひよこが動物と鳴き声を取りかえていく話。声色を変えて読むと大喜びする。"},
+  {cat:"ものがたりの えほん", name:"おんなじ おんなじ", by:"多田ヒロシ／こぐま社", age:"1〜3さい", box:2,
+   rec:"ぶうとぷう、持ち物が同じで嬉しい2匹。「おんなじ！」を真似しはじめる。"},
+  {cat:"ものがたりの えほん", name:"まるてん いろてん", by:"中辻悦子／福音館書店 0・1・2えほん", age:"0〜2さい", box:1,
+   rec:"丸と色だけで進む抽象絵本。乳児がいちばん反応する形と色でできている。"},
+  {cat:"ものがたりの えほん", name:"お？かお！", by:"ひらぎみつえ／永岡書店", age:"0〜2さい", box:1,
+   rec:"つまみを動かすと表情が変わるしかけ。赤ちゃんは顔が好きなので、まず必ず食いつく。"},
+  {cat:"ものがたりの えほん", name:"たんじょうび おめでとう", by:"—", age:"3さい〜",
+   rec:"誕生日に読む用の1冊。毎年その日に出す使い方ができる。"},
+  {cat:"ものがたりの えほん", name:"ここから 〜がんばるあなたに〜", by:"—", age:"年齢を問わない", box:2, q:1,
+   rec:"贈りものの本。進級・卒園など節目に渡す用で、子ども向けというより大人から子への手紙に近い。"},
 
-  // ▼ あかちゃんえほん
-  {cat:"あかちゃんえほん", name:"ぴょーん"},
-  {cat:"あかちゃんえほん", name:"ねむねむ ごろん"},
-  {cat:"あかちゃんえほん", name:"おやすみ〜"},
-  {cat:"あかちゃんえほん", name:"どうぶつ だあれ？"},
-  {cat:"あかちゃんえほん", name:"はみがきあそび（おでかけ版）", note:"しかけつき"},
-  {cat:"あかちゃんえほん", name:"だいすき！ぎゅっぎゅっ"},
-  {cat:"あかちゃんえほん", name:"パパ、かっこいい！"},
-  {cat:"あかちゃんえほん", name:"おさかなちゃんの えほん", q:1, note:"どのかんか確認中"},
-  {cat:"あかちゃんえほん", name:"ひよの えほん 2冊（おやつ・ふうせん）", q:1},
-  {cat:"あかちゃんえほん", name:"いつでも いっしょ どこでも いっしょ", q:1},
+  /* ▼ こどものとも（げっかんえほん） */
+  {cat:"こどものとも（げっかんえほん）", name:"おやすみしりとり", by:"大藤悦子 文／坂口友佳子 絵／2024年1月号", age:"5〜6さい", box:0,
+   rec:"寝る前のしりとりがそのまま夢につながる。就寝前の読み聞かせにぴったり。"},
+  {cat:"こどものとも（げっかんえほん）", name:"みっつのふえを もらった ヤーノシュ", by:"ハンガリーの昔話／2024年2月号", age:"5〜6さい", box:0,
+   rec:"笛の力で切り抜ける昔話。語りのリズムが気持ちいい。"},
+  {cat:"こどものとも（げっかんえほん）", name:"はいくどうぶつえん", by:"おおぎやなぎちか 文／サトウマサノリ 絵／2024年3月号", age:"5〜6さい", box:0,
+   rec:"動物園の生きものを俳句で。五・七・五に触れる最初の1冊にいい。"},
+  {cat:"こどものとも（げっかんえほん）", name:"いい はが はえる おまじない", by:"2024年4月号", age:"5〜6さい", box:0,
+   rec:"乳歯が抜けはじめる時期にちょうど効く話。"},
+  {cat:"こどものとも（げっかんえほん）", name:"ステッドのホテル", by:"くらささら ぶん／嶽まいこ え／2024年5月号", age:"5〜6さい", box:0,
+   rec:"カンガルーの給仕がもてなすホテル。細部まで描き込まれていて何度も見返せる。"},
+  {cat:"こどものとも（げっかんえほん）", name:"うちゅうえんそく", by:"2024年6月号", age:"5〜6さい", box:0,
+   rec:"宇宙へ遠足に行く話。図鑑NEO 宇宙と並べて読むと世界が広がる。"},
+  {cat:"こどものとも（げっかんえほん）", name:"かわの なかでは", by:"伊藤秀男 さく／2024年7月号", age:"5〜6さい", box:0,
+   rec:"水の中の生きものが迫力たっぷり。川遊びやキャンプの前後に。"},
+  {cat:"こどものとも（げっかんえほん）", name:"よなかの こうえん", by:"ROY ぶん／MISSISSIPPI え／2024年8月号", age:"5〜6さい", box:0,
+   rec:"誰もいない夜の公園で起きること。少しふしぎで、絵の空気がいい。"},
+  {cat:"こどものとも（げっかんえほん）", name:"ロンドンの でんしゃに のって", by:"せきなつこ さく／2024年9月号", age:"5〜6さい", box:0,
+   rec:"ロンドンの地下鉄と電車が実景で描かれる。電車好きなら文句なし。"},
+  {cat:"こどものとも（げっかんえほん）", name:"げたばこマンション", by:"森洋子 作／2024年10月号", age:"5〜6さい", box:0,
+   rec:"下駄箱がマンションに見えてくる発想。日常が違って見える楽しさ。"},
+  {cat:"こどものとも（げっかんえほん）", name:"エゾシカ", by:"MAYA MAXX えとぶん／2024年11月号", age:"5〜6さい", box:0,
+   rec:"大きな絵で迫るエゾシカ。絵の力だけで持っていく1冊。"},
+  {cat:"こどものとも（げっかんえほん）", name:"トムとモモ", by:"みやこしあきこ さく／2024年12月号", age:"5〜6さい", box:0,
+   rec:"雪の夜のしずかな話。みやこしあきこの絵が好きなら手元に残したい。"},
+  {cat:"こどものとも（げっかんえほん）", name:"ふゆに さがそう いいもの いくつ？", by:"おおたぐろまり さく／ちいさなかがくのとも", age:"3〜5さい", box:0,
+   rec:"冬の野外で見つかるものを探す観察絵本。散歩に持って出られる。"},
 
-  // ▼ キャラクターのほん
-  {cat:"キャラクターのほん", name:"リラックマ いつもいます"},
-  {cat:"キャラクターのほん", name:"リラックマ そばにいます"},
-  {cat:"キャラクターのほん", name:"リラックマ ここにいます"},
-  {cat:"キャラクターのほん", name:"リラックマ生活 ほっこり時間"},
-  {cat:"キャラクターのほん", name:"リラックマ生活 ひだまり暮らし"},
-  {cat:"キャラクターのほん", name:"リラックマ生活 うららか予報"},
-  {cat:"キャラクターのほん", name:"アンパンマンの ミニしかけえほん 2冊", note:"しかけつき"},
-  {cat:"キャラクターのほん", name:"すみっコぐらしの ほん", q:1, note:"タイトル確認中"},
-  {cat:"キャラクターのほん", name:"トミカ・プラレール ハイパーシリーズ しゅつどう！"},
+  /* ▼ あかちゃんえほん */
+  {cat:"あかちゃんえほん", name:"いない いない ばあ", by:"松谷みよ子 文／瀬川康男 絵／童心社", age:"0〜2さい", box:1,
+   rec:"日本でいちばん読まれている赤ちゃん絵本。迷ったらまずこれ、という位置の1冊。"},
+  {cat:"あかちゃんえほん", name:"のせて のせて", by:"松谷みよ子 文／東光寺啓 絵／童心社", age:"1〜3さい", box:2,
+   rec:"「のせて」「いいよ」の繰り返しで動物が乗り込む。掛け合いを覚えて一緒に言うようになる。"},
+  {cat:"あかちゃんえほん", name:"ぴょーん", by:"まつおかたつひで／ポプラ社", age:"0〜2さい", box:1,
+   rec:"縦にページをめくると生きものが跳ぶ。読むたび一緒に跳ねる、体で楽しむ絵本。"},
+  {cat:"あかちゃんえほん", name:"きんぎょが にげた", by:"五味太郎／福音館書店", age:"1〜3さい", box:2,
+   rec:"逃げた金魚を探すだけなのに何度でも遊べる。指さしが始まった頃にいちばん効く。"},
+  {cat:"あかちゃんえほん", name:"だいすき！ぎゅっぎゅっ", by:"まつおりかこ／岩崎書店", age:"0〜2さい", box:1,
+   rec:"読み終わりに実際にぎゅっとする流れになる本。寝る前の締めに使える。"},
+  {cat:"あかちゃんえほん", name:"ねむねむ ごろん", by:"たなかしん／KADOKAWA", age:"0〜2さい", box:1,
+   rec:"砂で描いたようなやわらかい絵。声を落として読むと、そのまま寝落ちに持ち込める。"},
+  {cat:"あかちゃんえほん", name:"おやすみ〜", by:"いしづちひろ 作／くわざわゆうこ 絵", age:"0〜2さい", box:1,
+   rec:"寝かしつけ用。短いので何度もくり返して読める。"},
+  {cat:"あかちゃんえほん", name:"どうぶつ だあれ？", by:"しみずだいすけ／0・1・2さい あそびえほん", age:"0〜2さい", box:1,
+   rec:"かくれんぼ形式で動物が出てくる。厚紙なので扱いが荒くても平気。"},
+  {cat:"あかちゃんえほん", name:"ちいさな さかな", by:"ディック・ブルーナ／講談社", age:"0〜2さい", box:1,
+   rec:"ブルーナの太い線とはっきりした色。視力が未熟な時期でも形をとらえられる。"},
+  {cat:"あかちゃんえほん", name:"きいろい ことり", by:"ディック・ブルーナ／講談社", age:"0〜2さい", box:1,
+   rec:"同シリーズ。4冊そろっているので並べて順に読める。"},
+  {cat:"あかちゃんえほん", name:"ふしぎな たまご", by:"ディック・ブルーナ／講談社", age:"0〜2さい", box:1,
+   rec:"たまごから何が出るかを待つ本。ページをめくる意味が分かりはじめる頃に。"},
+  {cat:"あかちゃんえほん", name:"ミッフィーの まる さんかく しかく", by:"ディック・ブルーナ／講談社", age:"0〜2さい", box:1,
+   rec:"形あそびの入門。ミッフィーの顔と一緒なので入りやすい。"},
+  {cat:"あかちゃんえほん", name:"うちゅう", by:"ミキハウス", age:"0〜2さい", box:1,
+   rec:"赤ちゃん向けの宇宙の本。強いコントラストの色使いで、月齢が低くても目で追える。"},
+  {cat:"あかちゃんえほん", name:"ひよよのおやつ", by:"ひよよ／ミキハウス", age:"0〜2さい", box:1,
+   rec:"くり返しのリズムで進むミキハウスのオリジナル絵本。読み聞かせのテンポが取りやすい。"},
+  {cat:"あかちゃんえほん", name:"ひよよとふうせん", by:"ひよよ／ミキハウス", age:"0〜2さい", box:1,
+   rec:"ページが縦に開いて、ふうせんと一緒に空へ昇っていく。めくった瞬間の驚きが仕掛けになっている。"},
+  {cat:"あかちゃんえほん", name:"おさかなちゃんの パパ かっこいい！", by:"ヒド・ファン・ヘネヒテン／学研", age:"1〜3さい", box:2,
+   rec:"パパを誇らしく思う話。父親が読み聞かせるとき用の1冊。"},
+  {cat:"あかちゃんえほん", name:"たべたよ クマタン", by:"若槻千夏 作／汐見稔幸 監修／主婦の友社", age:"1〜3さい", box:2,
+   rec:"食べることを促すしつけ絵本。叱らずに食事へ向かわせたいときに。"},
+  {cat:"あかちゃんえほん", name:"はみがきあそび（おでかけ版）", by:"きむらゆういち／偕成社", age:"1〜3さい", box:2,
+   rec:"しかけをめくって歯をみがく。歯みがきを嫌がる時期を乗り切るための定番。"},
+  {cat:"あかちゃんえほん", name:"のりもの どうなってるの？", by:"and EIGHT／しかけえほん", age:"2〜4さい", box:3, q:1,
+   rec:"救急車や消防車の中がしかけで開く。乗り物の「中身」に興味を持ちはじめた頃に。"},
+  {cat:"あかちゃんえほん", name:"いつでも いっしょ どこでも いっしょ", by:"—", age:"1〜3さい", q:1,
+   rec:"棚から読み取った1冊。タイトル未確定。"},
 
-  // ▼ えいごのほん
-  {cat:"えいごのほん", name:"The Little Prince 星の王子さま", note:"えいごの名作絵本"}
+  /* ▼ キャラクターのほん */
+  {cat:"キャラクターのほん", name:"アンパンマン ミニしかけえほん「この おと だあれ？」", by:"やなせたかし 原作／フレーベル館", age:"1〜3さい", box:2,
+   rec:"音あてのしかけ絵本。小さい手でもめくりやすいサイズ。"},
+  {cat:"キャラクターのほん", name:"アンパンマン ミニしかけえほん「すきなもの なあに？」", by:"やなせたかし 原作／フレーベル館", age:"1〜3さい", box:2,
+   rec:"同シリーズ。2冊セットで持たせると長く遊ぶ。"},
+  {cat:"キャラクターのほん", name:"トーマスとパーシーの やくそく", by:"トーマスのテレビえほん／ポプラ社", age:"3〜5さい", box:3,
+   rec:"テレビの場面がそのまま絵本に。話の筋を追う練習になる時期に。"},
+  {cat:"キャラクターのほん", name:"すみっコぐらしの ほん", by:"—", age:"4さい〜", q:1,
+   rec:"タイトル未確定の1冊。"},
+  {cat:"キャラクターのほん", name:"リラックマ いつもいます", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"子どもの本ではなく大人向け。大人の本棚へ移すだけで子ども棚が1段あく。"},
+  {cat:"キャラクターのほん", name:"リラックマ そばにいます", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"同上。大人の本棚へ。"},
+  {cat:"キャラクターのほん", name:"リラックマ ここにいます", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"同上。大人の本棚へ。"},
+  {cat:"キャラクターのほん", name:"リラックマ生活 ほっこり時間", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"同上。大人の本棚へ。"},
+  {cat:"キャラクターのほん", name:"リラックマ生活 ひだまり暮らし", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"同上。大人の本棚へ。"},
+  {cat:"キャラクターのほん", name:"リラックマ生活 うららか予報", by:"コンドウアキ／主婦と生活社", age:"大人むけ", keep:0,
+   rec:"同上。大人の本棚へ。"},
+
+  /* ▼ えいごのほん */
+  {cat:"えいごのほん", name:"The Little Prince 星の王子さま", by:"サン=テグジュペリ／英語の名作絵本", age:"8さい〜", keep:1,
+   rec:"今は音声を流して眺めるだけでいい。読める日が来るまで置いておく1冊。"}
 ];
 
 const CAT_ICON = {
   "ずかん・ちしきのほん":"🔍","あそべるほん":"🎈","ものがたりの えほん":"🌙",
-  "こどものとも（げっかんえほん）":"📅",
-  "あかちゃんえほん":"🐣","キャラクターのほん":"🧸","えいごのほん":"🔤"
+  "こどものとも（げっかんえほん）":"📅","あかちゃんえほん":"🐣",
+  "キャラクターのほん":"🧸","えいごのほん":"🔤"
 };
 
-const listEl = document.getElementById("list");
-const cats = [...new Set(EHON.map(b=>b.cat))];
-for(const cat of cats){
-  const books = EHON.filter(b=>b.cat===cat);
-  const sec = document.createElement("section");
-  sec.className = "gsec";
-  sec.innerHTML = `
-    <div class="ghead"><h2>${CAT_ICON[cat]||"📖"} ${cat}</h2><span class="gcount">${books.length}</span></div>
-    <ul class="books">${books.map(b=>`
-      <li><span class="bname">${b.name}${b.q?'<span class="qmark">？</span>':''}</span>
-      ${b.note?`<span class="bnote">${b.note}</span>`:''}</li>`).join("")}
-    </ul>`;
-  listEl.appendChild(sec);
+const FILTERS = [
+  {key:"all",  label:"ぜんぶ"},
+  {key:"keep", label:"🏠 棚に残す"},
+  {key:"box1", label:"📦 箱① 0〜1さい"},
+  {key:"box2", label:"📦 箱② 1〜3さい"},
+  {key:"box3", label:"📦 箱③ 3〜5さい"},
+  {key:"box0", label:"📅 こどものとも"}
+];
+let mode = "all";
+
+function match(b){
+  if(mode === "all")  return true;
+  if(mode === "keep") return b.keep === 1;
+  if(mode === "box0") return b.box === 0;
+  if(mode === "box1") return b.box === 1;
+  if(mode === "box2") return b.box === 2;
+  if(mode === "box3") return b.box === 3;
+  return true;
 }
-document.getElementById("total").textContent = EHON.length;
+
+function badges(b){
+  var s = "";
+  if(b.q) s += ' <span class="badge b-q">？</span>';
+  if(b.keep === 1) s += ' <span class="badge b-keep">棚</span>';
+  if(b.keep === 0) s += ' <span class="badge b-keep">大人の本棚へ</span>';
+  if(b.box === 1) s += ' <span class="badge b-box">箱①</span>';
+  if(b.box === 2) s += ' <span class="badge b-box">箱②</span>';
+  if(b.box === 3) s += ' <span class="badge b-box">箱③</span>';
+  if(b.box === 0) s += ' <span class="badge b-box">本人が選ぶ</span>';
+  return s;
+}
+
+const listEl = document.getElementById("list");
+
+function render(){
+  listEl.innerHTML = "";
+  const shown = EHON.filter(match);
+  const cats = [];
+  shown.forEach(function(b){ if(cats.indexOf(b.cat) < 0) cats.push(b.cat); });
+
+  cats.forEach(function(cat){
+    const books = shown.filter(function(b){ return b.cat === cat; });
+    const sec = document.createElement("section");
+    sec.className = "gsec";
+    const items = books.map(function(b){
+      return '<li>'
+        + '<div class="btitle"><span class="bname">' + b.name + '</span>' + badges(b) + '</div>'
+        + '<div class="bmeta">' + (b.by && b.by !== "—" ? b.by + '　／　' : '') + b.age + '</div>'
+        + '<div class="brec">' + b.rec + '</div>'
+        + '</li>';
+    }).join("");
+    sec.innerHTML = '<div class="ghead"><h2>' + (CAT_ICON[cat] || "📖") + ' ' + cat + '</h2>'
+      + '<span class="gcount">' + books.length + '</span></div>'
+      + '<ul class="books">' + items + '</ul>';
+    listEl.appendChild(sec);
+  });
+
+  document.getElementById("total").textContent = shown.length;
+}
+
+const fEl = document.getElementById("filters");
+FILTERS.forEach(function(f){
+  const btn = document.createElement("button");
+  btn.className = "chip";
+  btn.textContent = f.label;
+  btn.setAttribute("aria-pressed", f.key === mode ? "true" : "false");
+  btn.addEventListener("click", function(){
+    mode = f.key;
+    fEl.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed","false"); });
+    btn.setAttribute("aria-pressed","true");
+    render();
+  });
+  fEl.appendChild(btn);
+});
+
+render();
 </script>
 </body>
 </html>
