@@ -83,6 +83,7 @@
   .b-box{background:var(--deep);color:var(--cream)}
   .b-keep{border:1px solid var(--gold);color:#8a6a2a}
   .b-q{border:1px solid var(--accent);color:var(--accent)}
+  .b-home{background:#5d6f52;color:#f2ead8}
 
   .panel{
     background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
@@ -143,6 +144,7 @@
     表紙・背表紙の写真から読み取り、作者名と刊行情報はネットで確認したものです。
     <span class="badge b-q">？</span> は読み取りに自信がない本、
     <span class="badge b-keep">棚</span> は8さいの今こそ棚に置いておきたい本、
+    <span class="badge b-home">自宅保管</span> はおりがみ用具と一緒に自宅にまとめておく本、
     <span class="badge b-box">箱①</span> のような印は
     <a href="seiri.html" style="border-bottom:1px solid var(--line)">オリコンにしまう本</a>です。
     ちがっていたら教えてください。載っていない本は表紙の写真を送ってもらえれば追加します。
@@ -192,23 +194,23 @@ const EHON = [
    rec:"一人でも延々ねばれる。旅行や病院の待ち時間にいちばん強い1冊。"},
   {cat:"あそべるほん", name:"トリックアート工作", by:"—", age:"6さい〜", keep:1,
    rec:"読むだけでなく作って人を驚かせられる。8さいの手先なら自分で完成まで持っていける。"},
-  {cat:"あそべるほん", name:"かならず作れる ユニット折り紙", by:"北條敏彰／日本文芸社", age:"8さい〜", keep:1,
+  {cat:"おりがみ・かみこうさく", name:"かならず作れる ユニット折り紙", by:"北條敏彰／日本文芸社", age:"8さい〜", home:1,
    rec:"同じパーツを何枚も折って多面体に組む。今の年齢がちょうど挑戦しがいのある難度。"},
-  {cat:"あそべるほん", name:"男の子のおりがみ", by:"山田勝久／池田書店", age:"5さい〜", keep:1,
+  {cat:"おりがみ・かみこうさく", name:"男の子のおりがみ", by:"山田勝久／池田書店", age:"5さい〜", home:1,
    rec:"恐竜・手裏剣・乗り物など「かっこいい」寄りの作品集。折り紙を続ける動機になる。"},
   {cat:"あそべるほん", name:"あやとりで あそぼ！", by:"あやとりひも4本つき", age:"5さい〜", keep:1,
    rec:"ひもが付いていて買い足し不要。ふたりあやとりまで載っていて、向かい合って遊べる。"},
-  {cat:"あそべるほん", name:"親子であそぶ たのしいきりがみ", by:"小林一夫 監修／池田書店", age:"4さい〜", keep:1,
+  {cat:"おりがみ・かみこうさく", name:"親子であそぶ たのしいきりがみ", by:"小林一夫 監修／池田書店", age:"4さい〜", home:1,
    rec:"はさみが安全に使えるようになったら。折って切って開く瞬間がいちばん盛り上がる。"},
   {cat:"あそべるほん", name:"ポップ・アップ（ゆびあそびシリーズ⑩）", by:"—", age:"3さい〜", q:1,
    rec:"指を使った遊びの本。作者名が読み取れていない。"},
-  {cat:"あそべるほん", name:"3〜5才のおりがみ", by:"おかあさんといっしょ", age:"3〜5さい", box:2,
-   rec:"折り線が大きく印刷された入門編。棚には「男の子のおりがみ」を残せば役割が重複しない。"},
+  {cat:"おりがみ・かみこうさく", name:"3〜5才のおりがみ", by:"おかあさんといっしょ", age:"3〜5さい", home:1,
+   rec:"折り線が大きく印刷された入門編。いちばんやさしいので、おりがみセットの最初の1冊として置いておく。"},
   {cat:"あそべるほん", name:"アンパンマンを さがせ！①", by:"やなせたかし 原作／フレーベル館", age:"2〜5さい", box:2,
    rec:"ウォーリーの幼児版。字が読めなくても一人で長く遊べる。"},
   {cat:"あそべるほん", name:"トミカ めいろブック", by:"—", age:"3〜5さい", box:3,
    rec:"迷路40種。指でなぞるだけなので、鉛筆を持つ前でも遊べる。"},
-  {cat:"あそべるほん", name:"まるかいて ちょん（えかきうた）", by:"—", age:"3〜5さい", box:3,
+  {cat:"あそべるほん", name:"まるかいて ちょん", by:"えかきうた", age:"3〜5さい", box:3,
    rec:"歌いながら描くと絵になる。絵が苦手でも「描けた」体験ができる。"},
   {cat:"あそべるほん", name:"サファリへ いこう！", by:"ミキハウス／てざわりえほん", age:"0〜2さい", box:1,
    rec:"ざらざら・ふわふわを指で触る絵本。目より先に手が育つ時期に反応がいい。"},
@@ -354,13 +356,14 @@ const EHON = [
 
 const CAT_ICON = {
   "ずかん・ちしきのほん":"🔍","あそべるほん":"🎈","ものがたりの えほん":"🌙",
-  "こどものとも（げっかんえほん）":"📅","あかちゃんえほん":"🐣",
+  "おりがみ・かみこうさく":"✂️","こどものとも（げっかんえほん）":"📅","あかちゃんえほん":"🐣",
   "キャラクターのほん":"🧸","えいごのほん":"🔤"
 };
 
 const FILTERS = [
   {key:"all",  label:"ぜんぶ"},
   {key:"keep", label:"🏠 棚に残す"},
+  {key:"home", label:"✂️ おりがみの本（自宅保管）"},
   {key:"box1", label:"📦 箱① 0〜1さい"},
   {key:"box2", label:"📦 箱② 1〜3さい"},
   {key:"box3", label:"📦 箱③ 3〜5さい"},
@@ -371,6 +374,7 @@ let mode = "all";
 function match(b){
   if(mode === "all")  return true;
   if(mode === "keep") return b.keep === 1;
+  if(mode === "home") return b.home === 1;
   if(mode === "box0") return b.box === 0;
   if(mode === "box1") return b.box === 1;
   if(mode === "box2") return b.box === 2;
@@ -382,6 +386,7 @@ function badges(b){
   var s = "";
   if(b.q) s += ' <span class="badge b-q">？</span>';
   if(b.keep === 1) s += ' <span class="badge b-keep">棚</span>';
+  if(b.home === 1) s += ' <span class="badge b-home">自宅保管</span>';
   if(b.keep === 0) s += ' <span class="badge b-keep">大人の本棚へ</span>';
   if(b.box === 1) s += ' <span class="badge b-box">箱①</span>';
   if(b.box === 2) s += ' <span class="badge b-box">箱②</span>';
