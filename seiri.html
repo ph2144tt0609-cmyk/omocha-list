@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#262019">
+<title>えほんの せいり</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4efe4; --panel:#fdfbf5; --ink:#2c261e; --deep:#262019; --cream:#f2ead8;
+    --muted:#8d8371; --line:#e3dac4; --hair:#ece5d2; --accent:#a8552b; --gold:#b99149;
+    --radius:14px;
+    --serif:"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
+    --en:"Cormorant Garamond",serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 400px at 50% -100px, rgba(185,145,73,.06), transparent), var(--bg);
+    color:var(--ink); font-family:var(--gothic); font-size:15.5px; line-height:1.8; padding-bottom:72px;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:0 20px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  header{
+    background:radial-gradient(900px 300px at 50% 120%, rgba(185,145,73,.18), transparent), var(--deep);
+    color:var(--cream); text-align:center; padding:52px 16px 46px;
+  }
+  .ovl{display:block;font-family:var(--en);font-size:14px;letter-spacing:.55em;
+    text-indent:.55em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+  header h1{margin:0;font-family:var(--serif);font-weight:600;font-size:38px;
+    letter-spacing:.2em;text-indent:.2em;color:var(--cream)}
+  .orn{display:flex;align-items:center;gap:14px;justify-content:center;
+    margin:18px auto 12px;color:var(--gold);width:min(360px,70%)}
+  .orn::before,.orn::after{content:"";flex:1;border-top:1px solid rgba(185,145,73,.45)}
+  .orn span{font-size:9px}
+  header p{margin:0;font-size:13px;color:rgba(242,234,216,.75);letter-spacing:.2em;text-indent:.2em}
+
+  .back{text-align:center;margin:18px 0 0;font-size:13.5px;letter-spacing:.06em}
+  .back a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+  .back a:hover{color:var(--ink);border-color:var(--ink)}
+
+  .panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:0 1px 2px rgba(60,50,30,.04), 0 14px 40px -28px rgba(60,50,30,.4);
+    padding:22px 26px;margin-top:26px;
+  }
+  .panel h2{margin:0 0 10px;font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:.1em}
+  .panel p{margin:0 0 10px;font-size:14px;color:#5f5849}
+  .panel p:last-child{margin-bottom:0}
+  .steps{margin:0;padding-left:1.2em;font-size:14px;color:#5f5849}
+  .steps li{margin-bottom:7px}
+  .steps b{color:var(--ink)}
+
+  .progress{
+    display:flex;align-items:baseline;gap:10px;justify-content:center;
+    margin:30px 0 0;color:var(--muted);font-size:14px;letter-spacing:.06em;
+  }
+  .progress b{font-family:var(--en);font-style:italic;font-weight:500;
+    font-size:40px;color:var(--accent);line-height:1}
+
+  .gsec{margin-top:34px}
+  .ghead{display:flex;align-items:baseline;gap:12px;
+    border-bottom:3px double var(--line);padding-bottom:7px;margin-bottom:4px}
+  .ghead h2{margin:0;font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.1em}
+  .ghead .gcount{margin-left:auto;font-family:var(--en);font-style:italic;
+    font-size:15px;color:var(--muted);letter-spacing:.05em}
+  .glead{font-size:13px;color:var(--muted);margin:6px 2px 8px;line-height:1.7}
+
+  ul.books{list-style:none;margin:0;padding:0}
+  ul.books li{border-bottom:1px solid var(--hair)}
+  ul.books li:last-child{border-bottom:none}
+  ul.books label{display:flex;align-items:baseline;gap:11px;padding:11px 4px;cursor:pointer}
+  ul.books input{
+    appearance:none;width:19px;height:19px;flex-shrink:0;margin:0;position:relative;top:3px;
+    border:1.5px solid #c9bd9e;border-radius:5px;background:transparent;cursor:pointer;
+    transition:background .15s,border-color .15s;
+  }
+  ul.books input:checked{background:var(--deep);border-color:var(--deep)}
+  ul.books input:checked::after{
+    content:"✓";position:absolute;inset:0;color:var(--cream);
+    font-size:13px;display:flex;align-items:center;justify-content:center;
+  }
+  .bname{font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.04em}
+  input:checked ~ .bname{color:var(--muted);text-decoration:line-through;text-decoration-color:#c9bd9e}
+  .bnote{color:var(--muted);font-size:12.5px;margin-left:auto;text-align:right;flex-shrink:0;max-width:44%}
+
+  .keep{background:#f7f3e9;border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 22px;margin-top:26px;font-size:13.5px;color:#5f5849}
+  .keep b{color:var(--ink)}
+  .keep ul{margin:8px 0 0;padding-left:1.2em}
+  .keep li{margin-bottom:4px}
+
+  .tools{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .btn{appearance:none;border:1px solid var(--deep);border-radius:999px;padding:10px 20px;
+    font-size:13.5px;cursor:pointer;color:var(--cream);background:var(--deep);
+    letter-spacing:.08em;font-family:inherit;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:#c9bd9e}
+  .btn.ghost:hover{border-color:var(--ink)}
+
+  footer{text-align:center;margin-top:46px;color:var(--muted);font-size:12px;letter-spacing:.14em}
+  footer .fo{display:block;color:var(--gold);font-size:9px;margin-bottom:8px}
+
+  @page{ size:A4 portrait; margin:12mm; }
+  @media print{
+    body{background:#fff;color:#000;font-size:9.5pt;line-height:1.45;padding:0}
+    header,.back,.tools,footer,.noprint{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .progress{display:block;text-align:left;margin:0 0 6pt;border-bottom:2pt solid #333;
+      padding-bottom:4pt;font-size:9pt;color:#555}
+    .progress::before{content:"えほんの せいり　しまう候補チェックリスト";
+      font-family:var(--serif);font-size:14pt;font-weight:600;color:#000;letter-spacing:.12em}
+    .progress b{display:none}
+    .gsec{margin:0 0 9pt;break-inside:avoid}
+    .ghead{border-bottom:1.6pt double #666;padding-bottom:2pt;margin-bottom:2pt}
+    .ghead h2{font-size:11.5pt}
+    .glead{font-size:8pt;margin:2pt 0 3pt}
+    ul.books li{break-inside:avoid}
+    ul.books label{padding:2.6pt 0}
+    ul.books input{appearance:none;width:9pt;height:9pt;border:.8pt solid #666;border-radius:1.5pt;top:1pt}
+    ul.books input:checked{background:#fff}
+    ul.books input:checked::after{content:"✓";color:#000;font-size:8pt}
+    .bname{font-size:9.5pt;text-decoration:none !important;color:#000 !important}
+    .bnote{font-size:7.5pt;color:#666}
+    .keep{background:#fff;border:.8pt solid #999;padding:5pt 8pt;font-size:8pt;margin-top:8pt}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="ovl">Sorting Plan</span>
+  <h1>えほんの せいり</h1>
+  <div class="orn"><span>◆</span></div>
+  <p>8さいの いま、棚に なにを のこすか</p>
+</header>
+
+<div class="wrap">
+
+  <p class="back"><a href="ehon.html">← えほんの いちらんへ もどる</a></p>
+
+  <section class="panel noprint">
+    <h2>進めかた ── 棚を3つの層に分ける</h2>
+    <p>「捨てる／捨てない」の二択にすると手が止まります。<b>棚に置くのは今の一軍だけにして、残りはコンテナへ送る</b>。
+    在庫を動かすのと同じ考え方で、判断を先送りできるぶん速く終わります。</p>
+    <ol class="steps">
+      <li><b>一軍（手の届く段）</b>＝いま読む本。30冊くらいに絞ると、子どもが自分で選べるようになります</li>
+      <li><b>二軍（上下の段）</b>＝たまに開く本。図鑑・工作本はここ</li>
+      <li><b>保管（コンテナ）</b>＝卒業した本と思い出の本。ラベルに「2026-08 しまった」と日付を書く</li>
+    </ol>
+    <p style="margin-top:12px">下は <b>コンテナへ送る候補</b> です。チェックすると保存されるので、箱に入れながらスマホで消し込めます。
+    <b>迷ったら箱へ</b>——半年後に開けて一度も出さなかったら手放す、で十分です。</p>
+  </section>
+
+  <div class="progress"><b id="done">0</b>／<span id="all">0</span>さつ しまいました</div>
+
+  <div id="list"></div>
+
+  <section class="keep">
+    <b>📚 8さいの今こそ棚に残したい本（一軍の候補）</b>
+    <ul>
+      <li>図鑑NEO 3冊・ポケモン大図鑑 ── 字が読めるようになった今がいちばん役に立つ</li>
+      <li>ウォーリー・トリックアート工作・ユニット折り紙・男の子のおりがみ・あやとり ── 手を動かす本は8さいが本番</li>
+      <li>からすのパンやさん・くまのコールテンくん・くれよんのくろくん・そらまめくん ── 何度でも読める名作</li>
+      <li>星の王子さま（英語） ── まだ早いが、置いてあること自体に意味がある1冊</li>
+    </ul>
+  </section>
+
+  <div class="tools">
+    <button class="btn" onclick="window.print()">🖨️ 印刷する（A4たて）</button>
+    <button class="btn ghost" id="resetBtn">チェックを ぜんぶ消す</button>
+  </div>
+
+</div>
+
+<footer><span class="fo">◆</span>えほんの せいり ｜ 作成 2026-08-15</footer>
+
+<script>
+/* =========================================================
+   しまう候補（8さい＝小2 を基準に判定）
+   ========================================================= */
+const PLAN = [
+  {
+    cat:"A. 迷わず しまう",
+    icon:"📦",
+    lead:"0〜2さい向け。8さいの本人が読むことはもうない。※小さい弟妹・いとこがいるなら、この層は箱ではなく譲る先へ。",
+    books:[
+      {name:"ぴょーん", note:"0さい〜"},
+      {name:"ねむねむ ごろん"},
+      {name:"おやすみ〜"},
+      {name:"どうぶつ だあれ？"},
+      {name:"はみがきあそび（おでかけ版）", note:"しかけつき"},
+      {name:"だいすき！ぎゅっぎゅっ"},
+      {name:"パパ、かっこいい！"},
+      {name:"おさかなちゃんの えほん"},
+      {name:"ひよの えほん（おやつ）"},
+      {name:"ひよの えほん（ふうせん）"},
+      {name:"いつでも いっしょ どこでも いっしょ"},
+      {name:"2さい まるごとひゃっか", note:"タイトルどおり2さい向け"},
+      {name:"アンパンマンの ミニしかけえほん ①"},
+      {name:"アンパンマンの ミニしかけえほん ②"}
+    ]
+  },
+  {
+    cat:"B. たぶん 卒業",
+    icon:"🚂",
+    lead:"3〜5さい向け。もう読んでいないはずだが思い入れがある帯。本人に1冊ずつ見せて決めさせると速い。",
+    books:[
+      {name:"はじめてのずかん はたらくくるま"},
+      {name:"きかんしゃトーマス キャラクターコレクション", note:"幼児向け図鑑"},
+      {name:"プラレールコレクション2021", note:"2021年版＝内容が古い"},
+      {name:"トミカ・プラレール ハイパーシリーズ しゅつどう！"},
+      {name:"サファリへ いこう！", note:"てざわりえほん"},
+      {name:"おべんとうバス"},
+      {name:"お？かお！"},
+      {name:"とりかえっこ"},
+      {name:"おんなじ おんなじ"},
+      {name:"まるてん いろてん"},
+      {name:"3〜5才のおりがみ", note:"「男の子のおりがみ」と役割が重複"}
+    ]
+  },
+  {
+    cat:"C. 大人の本（棚から出すだけ）",
+    icon:"☕",
+    lead:"子どもの本ではなく主婦と生活社のコンドウアキ作品。子ども棚を1段ぶん占めているので、大人の本棚へ移すだけで空きができる。",
+    books:[
+      {name:"リラックマ いつもいます"},
+      {name:"リラックマ そばにいます"},
+      {name:"リラックマ ここにいます"},
+      {name:"リラックマ生活 ほっこり時間"},
+      {name:"リラックマ生活 ひだまり暮らし"},
+      {name:"リラックマ生活 うららか予報"}
+    ]
+  },
+  {
+    cat:"D. 保留（本人に選ばせる）",
+    icon:"📅",
+    lead:"こどものとも＝5〜6さい向けの月刊絵本。内容は8さいでも読めるが13冊は棚を圧迫する。「棚に残す5冊」を本人に選ばせ、残りを箱へ。",
+    books:[
+      {name:"おやすみしりとり", note:"1月号"},
+      {name:"みっつのふえを もらった ヤーノシュ", note:"2月号"},
+      {name:"はいくどうぶつえん", note:"3月号"},
+      {name:"いい はが はえる おまじない", note:"4月号"},
+      {name:"ステッドのホテル", note:"5月号"},
+      {name:"うちゅうえんそく", note:"6月号"},
+      {name:"かわの なかでは", note:"7月号"},
+      {name:"よなかの こうえん", note:"8月号"},
+      {name:"ロンドンの でんしゃに のって", note:"9月号"},
+      {name:"げたばこマンション", note:"10月号"},
+      {name:"エゾシカ", note:"11月号"},
+      {name:"トムとモモ", note:"12月号"},
+      {name:"ふゆに さがそう いいもの いくつ？", note:"ちいさなかがくのとも"}
+    ]
+  }
+];
+
+const KEY = "ehon-seiri-v1";
+let checked = {};
+try{ checked = JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(e){ checked = {}; }
+
+const listEl = document.getElementById("list");
+let total = 0;
+
+PLAN.forEach(function(sec, si){
+  total += sec.books.length;
+  const el = document.createElement("section");
+  el.className = "gsec";
+  const items = sec.books.map(function(b, bi){
+    const id = "s" + si + "b" + bi;
+    return '<li><label>'
+      + '<input type="checkbox" data-id="' + id + '"' + (checked[id] ? ' checked' : '') + '>'
+      + '<span class="bname">' + b.name + '</span>'
+      + (b.note ? '<span class="bnote">' + b.note + '</span>' : '')
+      + '</label></li>';
+  }).join("");
+  el.innerHTML = '<div class="ghead"><h2>' + sec.icon + ' ' + sec.cat + '</h2>'
+    + '<span class="gcount">' + sec.books.length + '</span></div>'
+    + '<p class="glead">' + sec.lead + '</p>'
+    + '<ul class="books">' + items + '</ul>';
+  listEl.appendChild(el);
+});
+
+document.getElementById("all").textContent = total;
+
+function refresh(){
+  const n = Object.values(checked).filter(Boolean).length;
+  document.getElementById("done").textContent = n;
+}
+
+listEl.addEventListener("change", function(e){
+  if(e.target.type !== "checkbox") return;
+  checked[e.target.dataset.id] = e.target.checked;
+  localStorage.setItem(KEY, JSON.stringify(checked));
+  refresh();
+});
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  checked = {};
+  localStorage.removeItem(KEY);
+  listEl.querySelectorAll("input").forEach(function(i){ i.checked = false; });
+  refresh();
+});
+
+refresh();
+</script>
+</body>
+</html>
